@@ -1,0 +1,70 @@
+<mujoco>
+    <tendon>
+        <fixed name="lh_FFJ0">
+            <joint joint="lh_FFJ1" coef="1"/>
+            <joint joint="lh_FFJ2" coef="1"/>
+        </fixed>
+        <fixed name="lh_MFJ0">
+            <joint joint="lh_MFJ1" coef="1"/>
+            <joint joint="lh_MFJ2" coef="1"/>
+        </fixed>
+        <fixed name="lh_RFJ0">
+            <joint joint="lh_RFJ1" coef="1"/>
+            <joint joint="lh_RFJ2" coef="1"/>
+        </fixed>
+        <fixed name="lh_LFJ0">
+            <joint joint="lh_LFJ1" coef="1"/>
+            <joint joint="lh_LFJ2" coef="1"/>
+        </fixed>
+    </tendon>
+    <actuator>
+        <motor name="lh_WRJ2" joint="lh_WRJ2" ctrllimited="false" ctrlrange="-0.523599 0.174533"/>
+        <motor name="lh_WRJ1" joint="lh_WRJ1" ctrllimited="false" ctrlrange="-0.698132 0.488692"/>
+        <motor name="lh_FFJ4" joint="lh_FFJ4" ctrllimited="false" ctrlrange="-0.349066 0.349066"/>
+        <motor name="lh_FFJ3" joint="lh_FFJ3" ctrllimited="false" ctrlrange="0 1.5708"/>
+        <motor name="lh_FFJ0" tendon="lh_FFJ0" ctrllimited="false" ctrlrange="0 3.1416"/>
+        <motor name="lh_MFJ4" joint="lh_MFJ4" ctrllimited="false" ctrlrange="-0.349066 0.349066"/>
+        <motor name="lh_MFJ3" joint="lh_MFJ3" ctrllimited="false" ctrlrange="0 1.5708"/>
+        <motor name="lh_MFJ0" tendon="lh_MFJ0" ctrllimited="false" ctrlrange="0 3.1416"/>
+        <motor name="lh_RFJ4" joint="lh_RFJ4" ctrllimited="false" ctrlrange="-0.349066 0.349066"/>
+        <motor name="lh_RFJ3" joint="lh_RFJ3" ctrllimited="false" ctrlrange="0 1.5708"/>
+        <motor name="lh_RFJ0" tendon="lh_RFJ0" ctrllimited="false" ctrlrange="0 3.1416"/>
+        <motor name="lh_LFJ5" joint="lh_LFJ5" ctrllimited="false" ctrlrange="0 0.785398"/>
+        <motor name="lh_LFJ4" joint="lh_LFJ4" ctrllimited="false" ctrlrange="-0.349066 0.349066"/>
+        <motor name="lh_LFJ3" joint="lh_LFJ3" ctrllimited="false" ctrlrange="0 1.5708"/>
+        <motor name="lh_LFJ0" tendon="lh_LFJ0" ctrllimited="false" ctrlrange="0 3.1416"/>
+        <motor name="lh_THJ5" joint="lh_THJ5" ctrllimited="false" ctrlrange="-1.0472 1.0472"/>
+        <motor name="lh_THJ4" joint="lh_THJ4" ctrllimited="false" ctrlrange="0 1.22173"/>
+        <motor name="lh_THJ3" joint="lh_THJ3" ctrllimited="false" ctrlrange="-0.20944 0.20944"/>
+        <motor name="lh_THJ2" joint="lh_THJ2" ctrllimited="false" ctrlrange="-0.698132 0.698132"/>
+        <motor name="lh_THJ1" joint="lh_THJ1" ctrllimited="false" ctrlrange="0 1.5708"/>
+    </actuator>
+    <contact>
+        <exclude body1="lh_forearm" body2="lh_wrist"/>
+        <exclude body1="lh_wrist" body2="lh_palm"/>
+        <exclude body1="lh_palm" body2="lh_ffknuckle"/>
+        <exclude body1="lh_palm" body2="lh_ffproximal"/>
+        <exclude body1="lh_ffknuckle" body2="lh_ffproximal"/>
+        <exclude body1="lh_ffproximal" body2="lh_ffmiddle"/>
+        <exclude body1="lh_ffmiddle" body2="lh_ffdistal"/>
+        <exclude body1="lh_palm" body2="lh_mfknuckle"/>
+        <exclude body1="lh_palm" body2="lh_mfproximal"/>
+        <exclude body1="lh_mfknuckle" body2="lh_mfproximal"/>
+        <exclude body1="lh_mfproximal" body2="lh_mfmiddle"/>
+        <exclude body1="lh_mfmiddle" body2="lh_mfdistal"/>
+        <exclude body1="lh_palm" body2="lh_rfknuckle"/>
+        <exclude body1="lh_palm" body2="lh_rfproximal"/>
+        <exclude body1="lh_rfknuckle" body2="lh_rfproximal"/>
+        <exclude body1="lh_rfproximal" body2="lh_rfmiddle"/>
+        <exclude body1="lh_rfmiddle" body2="lh_rfdistal"/>
+        <exclude body1="lh_palm" body2="lh_lfmetacarpal"/>
+        <exclude body1="lh_lfmetacarpal" body2="lh_lfknuckle"/>
+        <exclude body1="lh_lfmetacarpal" body2="lh_lfproximal"/>
+        <exclude body1="lh_lfknuckle" body2="lh_lfproximal"/>
+        <exclude body1="lh_lfproximal" body2="lh_lfmiddle"/>
+        <exclude body1="lh_lfmiddle" body2="lh_lfdistal"/>
+        <exclude body1="lh_palm" body2="lh_thproximal"/>
+        <exclude body1="lh_thproximal" body2="lh_thmiddle"/>
+        <exclude body1="lh_thmiddle" body2="lh_thdistal"/>
+    </contact>
+</mujoco>

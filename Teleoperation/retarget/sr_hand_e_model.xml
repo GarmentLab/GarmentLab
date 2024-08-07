@@ -1,0 +1,145 @@
+<mujoco model="shadowhand_motor">
+    <body name="rh_forearm">
+        <inertial pos="0 0 0.09" mass="3" diaginertia="0.0138 0.0138 0.00744" />
+        <include file="meshes/arm_and_hand_meshes/forearm.xml" />
+        <body name="rh_wrist" pos="0 -0.01 0.213">
+            <inertial pos="0 0 0.029" quat="0.5 0.5 0.5 0.5" mass="0.1" diaginertia="6.4e-05 4.38e-05 3.5e-05" />
+            <joint name="rh_WRJ2" axis="0 1 0" range="-0.523599 0.174533" damping="1.0" frictionloss="0.1"/>
+            <include file="meshes/arm_and_hand_meshes/wrist.xml" />
+            <body name="rh_palm" pos="0 0 0.034">
+                <inertial pos="0 0 0.035" quat="0.707107 0 0 0.707107" mass="0.3" diaginertia="0.0005287 0.0003581 0.000191" />
+                <joint name="rh_WRJ1" axis="1 0 0" range="-0.698132 0.488692" damping="1.0" frictionloss="0.1"/>
+                <include file="meshes/arm_and_hand_meshes/palm.xml" />
+                <body name="rh_manipulator" pos="0 0 0.05">
+                    <inertial pos="0 0 0.05" mass="0" diaginertia="0 0 0" />
+                </body>
+                <body name="rh_imu" pos="0.01785 0.00765 0.049125" quat="2.31079e-07 -2.31079e-07 0.707107 0.707107">
+                    <inertial pos="0.01785 0.00765 0.049125" quat="2.31079e-07 -2.31079e-07 0.707107 0.707107" mass="0" diaginertia="0 0 0" />
+                </body>
+                <body name="rh_ffknuckle" pos="0.033 0 0.095">
+                    <inertial pos="0 0 0" quat="0.5 0.5 -0.5 0.5" mass="0.008" diaginertia="3.2e-07 2.6e-07 2.6e-07" />
+                    <joint name="rh_FFJ4" class="FJ4" axis="0 -1 0"/>
+                    <include file="meshes/arm_and_hand_meshes/duplicate_geoms/FF_knuckle.xml"/>
+                    <body name="rh_ffproximal">
+                        <joint name="rh_FFJ3" class="FJ3"/>
+                        <inertial pos="0 0 0.0225" quat="0.707107 0 0 0.707107" mass="0.03" diaginertia="1e-05 9.8e-06 1.8e-06"/>
+                        <include file="meshes/arm_and_hand_meshes/duplicate_geoms/FF3.xml"/>
+                        <body name="rh_ffmiddle" pos="0 0 0.045">
+                            <inertial pos="0 0 0.0125" quat="0.707107 0 0 0.707107" mass="0.017" diaginertia="2.7e-06 2.6e-06 8.7e-07"/>
+                            <joint name="rh_FFJ2" class="FJ2"/>
+                            <include file="meshes/arm_and_hand_meshes/duplicate_geoms/FF2.xml"/>
+                            <body name="rh_ffdistal" pos="0 0 0.025">
+                                <inertial pos="0 0 0.012" quat="0.707107 0 0 0.707107" mass="0.012" diaginertia="1.1e-06 9.4e-07 5.3e-07"/>
+                                <joint name="rh_FFJ1" class="FJ1"/>
+                                <include file="meshes/arm_and_hand_meshes/duplicate_geoms/FF1.xml"/>
+                                <body name="rh_fftip" pos="0 0 0.026">
+                                    <inertial pos="0 0 0" mass="0.001" diaginertia="0 0 0"/>
+                                </body>
+                            </body>
+                        </body>
+                    </body>
+                </body>
+                <body name="rh_mfknuckle" pos="0.011 0 0.099">
+                    <inertial pos="0 0 0" quat="0.5 0.5 -0.5 0.5" mass="0.008" diaginertia="3.2e-07 2.6e-07 2.6e-07" />
+                    <joint name="rh_MFJ4" class="FJ4" axis="0 -1 0"/>
+                    <include file="meshes/arm_and_hand_meshes/duplicate_geoms/MF_knuckle.xml"/>
+                    <body name="rh_mfproximal">
+                        <joint name="rh_MFJ3" class="FJ3"/>
+                        <inertial pos="0 0 0.0225" quat="0.707107 0 0 0.707107" mass="0.03" diaginertia="1e-05 9.8e-06 1.8e-06"/>
+                        <include file="meshes/arm_and_hand_meshes/duplicate_geoms/MF3.xml"/>
+                        <body name="rh_mfmiddle" pos="0 0 0.045">
+                            <inertial pos="0 0 0.0125" quat="0.707107 0 0 0.707107" mass="0.017" diaginertia="2.7e-06 2.6e-06 8.7e-07"/>
+                            <joint name="rh_MFJ2" class="FJ2"/>
+                            <include file="meshes/arm_and_hand_meshes/duplicate_geoms/MF2.xml"/>
+                            <body name="rh_mfdistal" pos="0 0 0.025">
+                                <inertial pos="0 0 0.012" quat="0.707107 0 0 0.707107" mass="0.012" diaginertia="1.1e-06 9.4e-07 5.3e-07"/>
+                                <joint name="rh_MFJ1" class="FJ1"/>
+                                <include file="meshes/arm_and_hand_meshes/duplicate_geoms/MF1.xml"/>
+                                <body name="rh_mftip" pos="0 0 0.026">
+                                    <inertial pos="0 0 0" mass="0.001" diaginertia="0 0 0"/>
+                                </body>
+                            </body>
+                        </body>
+                    </body>
+                </body>
+                <body name="rh_rfknuckle" pos="-0.011 0 0.095">
+                    <inertial pos="0 0 0" quat="0.5 0.5 -0.5 0.5" mass="0.008" diaginertia="3.2e-07 2.6e-07 2.6e-07" />
+                    <joint name="rh_RFJ4" class="FJ4" axis="0 1 0"/>
+                    <include file="meshes/arm_and_hand_meshes/duplicate_geoms/RF_knuckle.xml"/>
+                    <body name="rh_rfproximal">
+                        <inertial pos="0 0 0.0225" quat="0.707107 0 0 0.707107" mass="0.03" diaginertia="1e-05 9.8e-06 1.8e-06"/>
+                        <joint name="rh_RFJ3" class="FJ3"/>
+                        <include file="meshes/arm_and_hand_meshes/duplicate_geoms/RF3.xml"/>
+                        <body name="rh_rfmiddle" pos="0 0 0.045">
+                            <inertial pos="0 0 0.0125" quat="0.707107 0 0 0.707107" mass="0.017" diaginertia="2.7e-06 2.6e-06 8.7e-07"/>
+                            <joint name="rh_RFJ2" class="FJ2"/>
+                            <include file="meshes/arm_and_hand_meshes/duplicate_geoms/RF2.xml"/>
+                            <body name="rh_rfdistal" pos="0 0 0.025">
+                                <inertial pos="0 0 0.012" quat="0.707107 0 0 0.707107" mass="0.012" diaginertia="1.1e-06 9.4e-07 5.3e-07"/>
+                                <joint name="rh_RFJ1" class="FJ1"/>
+                                <include file="meshes/arm_and_hand_meshes/duplicate_geoms/RF1.xml"/>
+                                <body name="rh_rftip" pos="0 0 0.026">
+                                    <inertial pos="0 0 0" mass="0.001" diaginertia="0 0 0"/>
+                                </body>
+                            </body>
+                        </body>
+                    </body>
+                </body>
+                <body name="rh_lfmetacarpal" pos="-0.033 0 0.02071">
+                    <inertial pos="0 0 0.04" quat="0.707107 0 0 0.707107" mass="0.03" diaginertia="1.638e-05 1.45e-05 4.272e-06" />
+                    <joint name="rh_LFJ5" axis="0.573576 0 0.819152" range="0 0.785398"/>
+                    <include file="meshes/arm_and_hand_meshes/lfmetacarpal.xml" />
+                    <body name="rh_lfknuckle" pos="0 0 0.06579">
+                    <inertial pos="0 0 0" quat="0.5 0.5 -0.5 0.5" mass="0.008" diaginertia="3.2e-07 2.6e-07 2.6e-07" />
+                        <joint name="rh_LFJ4" class="FJ4" axis="0 1 0"/>
+                        <include file="meshes/arm_and_hand_meshes/duplicate_geoms/LF_knuckle.xml"/>
+                        <body name="rh_lfproximal">
+                            <inertial pos="0 0 0.0225" quat="0.707107 0 0 0.707107" mass="0.03" diaginertia="1e-05 9.8e-06 1.8e-06"/>
+                            <joint name="rh_LFJ3" class="FJ3"/>
+                            <include file="meshes/arm_and_hand_meshes/duplicate_geoms/LF3.xml"/>
+                            <body name="rh_lfmiddle" pos="0 0 0.045">
+                                <inertial pos="0 0 0.0125" quat="0.707107 0 0 0.707107" mass="0.017" diaginertia="2.7e-06 2.6e-06 8.7e-07"/>
+                                <joint name="rh_LFJ2" class="FJ2"/>
+                                <include file="meshes/arm_and_hand_meshes/duplicate_geoms/LF2.xml"/>
+                                <body name="rh_lfdistal" pos="0 0 0.025">
+                                    <inertial pos="0 0 0.012" quat="0.707107 0 0 0.707107" mass="0.012" diaginertia="1.1e-06 9.4e-07 5.3e-07"/>
+                                    <joint name="rh_LFJ1" class="FJ1"/>
+                                    <include file="meshes/arm_and_hand_meshes/duplicate_geoms/LF1.xml"/>
+                                    <body name="rh_lftip" pos="0 0 0.026">
+                                        <inertial pos="0 0 0" mass="0.001" diaginertia="0 0 0"/>
+                                    </body>
+                                </body>
+                            </body>
+                        </body>
+                    </body>
+                </body>
+                <body name="rh_thbase" pos="0.034 -0.0085 0.029" quat="0.92388 0 0.382683 0">
+                    <inertial pos="0 0 0" mass="0.01" diaginertia="1.6e-07 1.6e-07 1.6e-07" />
+                    <joint name="rh_THJ5" axis="0 0 -1" range="-1.0472 1.0472" class="THJ5"/>
+                    <body name="rh_thproximal">
+                        <inertial pos="0 0 0.019" mass="0.04" diaginertia="1.36e-05 1.36e-05 3.13e-06" />
+                        <joint name="rh_THJ4" axis="1 0 0" range="0 1.22173" class="THJ4"/>
+                        <include file="meshes/arm_and_hand_meshes/TH3.xml"/>
+                        <body name="rh_thhub" pos="0 0 0.038">
+                            <inertial pos="0 0 0" mass="0.005" diaginertia="1.0e-06 1.0e-06 3.0e-07" />
+                            <joint name="rh_THJ3" axis="1 0 0" range="-0.20944 0.20944" class="THJ3"/>
+                            <body name="rh_thmiddle">
+                                <inertial pos="0 0 0.016" mass="0.02" diaginertia="5.1e-06 5.1e-06 1.21e-06" />
+                                <joint name="rh_THJ2" axis="0 -1 0" range="-0.698132 0.698132" class="THJ2"/>
+                                <include file="meshes/arm_and_hand_meshes/TH2.xml"/>
+                                <body name="rh_thdistal" pos="0 0 0.032" quat="0.707107 0 0 -0.707107">
+                                    <inertial pos="0 0 0.01375" quat="0.707107 0 0 0.707107" mass="0.016" diaginertia="2.2e-06 2.1e-06 1e-06" />
+                                    <joint name="rh_THJ1" axis="1 0 0" range="0 1.5708" class="THJ1"/>
+                                    <include file="meshes/arm_and_hand_meshes/TH1.xml"/>
+                                    <body name="rh_thtip" pos="0 0 0.0275">
+                                        <inertial pos="0 0 0" mass="0.001" diaginertia="0 0 0" />
+                                    </body>
+                                </body>
+                            </body>
+                        </body>
+                    </body>
+                </body>
+            </body>
+        </body>
+    </body>
+</mujoco>

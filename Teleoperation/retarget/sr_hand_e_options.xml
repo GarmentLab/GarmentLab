@@ -1,0 +1,71 @@
+<mujoco>
+<size njmax="1000" nconmax="1000" />
+    <tendon>
+        <fixed name="rh_FFJ0">
+            <joint joint="rh_FFJ1" coef="1"/>
+            <joint joint="rh_FFJ2" coef="1"/>
+        </fixed>
+        <fixed name="rh_MFJ0">
+            <joint joint="rh_MFJ1" coef="1"/>
+            <joint joint="rh_MFJ2" coef="1"/>
+        </fixed>
+        <fixed name="rh_RFJ0">
+            <joint joint="rh_RFJ1" coef="1"/>
+            <joint joint="rh_RFJ2" coef="1"/>
+        </fixed>
+        <fixed name="rh_LFJ0">
+            <joint joint="rh_LFJ1" coef="1"/>
+            <joint joint="rh_LFJ2" coef="1"/>
+        </fixed>
+    </tendon>
+    <actuator>
+        <motor name="rh_WRJ2" joint="rh_WRJ2" ctrllimited="false" ctrlrange="-0.523599 0.174533"/>
+        <motor name="rh_WRJ1" joint="rh_WRJ1" ctrllimited="false" ctrlrange="-0.698132 0.488692"/>
+        <motor name="rh_FFJ4" joint="rh_FFJ4" ctrllimited="false" ctrlrange="-0.349066 0.349066"/>
+        <motor name="rh_FFJ3" joint="rh_FFJ3" ctrllimited="false" ctrlrange="0 1.5708"/>
+        <motor name="rh_FFJ0" tendon="rh_FFJ0" ctrllimited="false" ctrlrange="0 3.1416"/>
+        <motor name="rh_MFJ4" joint="rh_MFJ4" ctrllimited="false" ctrlrange="-0.349066 0.349066"/>
+        <motor name="rh_MFJ3" joint="rh_MFJ3" ctrllimited="false" ctrlrange="0 1.5708"/>
+        <motor name="rh_MFJ0" tendon="rh_MFJ0" ctrllimited="false" ctrlrange="0 3.1416"/>
+        <motor name="rh_RFJ4" joint="rh_RFJ4" ctrllimited="false" ctrlrange="-0.349066 0.349066"/>
+        <motor name="rh_RFJ3" joint="rh_RFJ3" ctrllimited="false" ctrlrange="0 1.5708"/>
+        <motor name="rh_RFJ0" tendon="rh_RFJ0" ctrllimited="false" ctrlrange="0 3.1416"/>
+        <motor name="rh_LFJ5" joint="rh_LFJ5" ctrllimited="false" ctrlrange="0 0.785398"/>
+        <motor name="rh_LFJ4" joint="rh_LFJ4" ctrllimited="false" ctrlrange="-0.349066 0.349066"/>
+        <motor name="rh_LFJ3" joint="rh_LFJ3" ctrllimited="false" ctrlrange="0 1.5708"/>
+        <motor name="rh_LFJ0" tendon="rh_LFJ0" ctrllimited="false" ctrlrange="0 3.1416"/>
+        <motor name="rh_THJ5" joint="rh_THJ5" ctrllimited="false" ctrlrange="-1.0472 1.0472"/>
+        <motor name="rh_THJ4" joint="rh_THJ4" ctrllimited="false" ctrlrange="0 1.22173"/>
+        <motor name="rh_THJ3" joint="rh_THJ3" ctrllimited="false" ctrlrange="-0.20944 0.20944"/>
+        <motor name="rh_THJ2" joint="rh_THJ2" ctrllimited="false" ctrlrange="-0.698132 0.698132"/>
+        <motor name="rh_THJ1" joint="rh_THJ1" ctrllimited="false" ctrlrange="0 1.5708"/>
+    </actuator>
+    <contact>
+        <exclude body1="rh_forearm" body2="rh_wrist"/>
+        <exclude body1="rh_wrist" body2="rh_palm"/>
+        <exclude body1="rh_palm" body2="rh_ffknuckle"/>
+        <exclude body1="rh_palm" body2="rh_ffproximal"/>
+        <exclude body1="rh_ffknuckle" body2="rh_ffproximal"/>
+        <exclude body1="rh_ffproximal" body2="rh_ffmiddle"/>
+        <exclude body1="rh_ffmiddle" body2="rh_ffdistal"/>
+        <exclude body1="rh_palm" body2="rh_mfknuckle"/>
+        <exclude body1="rh_palm" body2="rh_mfproximal"/>
+        <exclude body1="rh_mfknuckle" body2="rh_mfproximal"/>
+        <exclude body1="rh_mfproximal" body2="rh_mfmiddle"/>
+        <exclude body1="rh_mfmiddle" body2="rh_mfdistal"/>
+        <exclude body1="rh_palm" body2="rh_rfknuckle"/>
+        <exclude body1="rh_palm" body2="rh_rfproximal"/>
+        <exclude body1="rh_rfknuckle" body2="rh_rfproximal"/>
+        <exclude body1="rh_rfproximal" body2="rh_rfmiddle"/>
+        <exclude body1="rh_rfmiddle" body2="rh_rfdistal"/>
+        <exclude body1="rh_palm" body2="rh_lfmetacarpal"/>
+        <exclude body1="rh_lfmetacarpal" body2="rh_lfknuckle"/>
+        <exclude body1="rh_lfmetacarpal" body2="rh_lfproximal"/>
+        <exclude body1="rh_lfknuckle" body2="rh_lfproximal"/>
+        <exclude body1="rh_lfproximal" body2="rh_lfmiddle"/>
+        <exclude body1="rh_lfmiddle" body2="rh_lfdistal"/>
+        <exclude body1="rh_palm" body2="rh_thproximal"/>
+        <exclude body1="rh_thproximal" body2="rh_thmiddle"/>
+        <exclude body1="rh_thmiddle" body2="rh_thdistal"/>
+    </contact>
+</mujoco>

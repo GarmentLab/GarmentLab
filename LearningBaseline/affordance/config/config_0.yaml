@@ -1,0 +1,25 @@
+demo_point:
+- 0.70559
+- -0.2288
+- 0.01448
+garment_config:
+  garment_ori:
+  - 0.47366
+  - -0.32437
+  - -0.46264
+  - -0.67557
+  garment_path: /home/user/GarmentLab/Assets/Garment/Dress/Long_ShortSleeve/DLSS_Dress182/DLSS_Dress182_obj.usd
+  garment_pos:
+  - -0.15
+  - 0
+  - 0.5
+  garment_scale:
+  - 0.006
+  - 0.006
+  - 0.006
+garment_name: dress0
+target_point:
+- 0.41957
+- -0.01923
+- 0.84274
+task_name: hang
