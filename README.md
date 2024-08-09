@@ -47,7 +47,7 @@ We provide brief guidance on this page. Please refer to [our documentation](http
 |----------|:-------------|:-------------|
 |![Gif](./hang/hang.gif)|[Hang](softgym/envs/cloth_drop.py) | Hang the clothes on the clothesline |
 |![Gif](./hang/fling.gif)|[Fling](softgym/envs/cloth_fold.py) | Unfold the clothes and lay them flat on the floor|
-|![Gif](./hang/wish.gif)|[Wish](softgym/envs/cloth_flatten.py)| Put the scarf into the sink and wash it clean|
+|![Gif](./hang/wish.gif)|[Wash](softgym/envs/cloth_flatten.py)| Put the scarf into the sink and wash it clean|
 |![Gif](./hang/store.gif)|[Store](softgym/envs/pour_water.py)| Grab the hat and put it in the closet |
 |![Gif](./phy/demo_fold.gif)|[Fold](softgym/envs/pass_water.py)| Fold the flat-laid piece of clothing neatly|
 |![Gif](./phy/PhyCloth.gif)|[PhysicsGarment](softgym/envs/rope_flatten.py)| test the performance of garment simulation|
