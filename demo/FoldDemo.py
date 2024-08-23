@@ -5,7 +5,7 @@ from Env.Config.GarmentConfig import GarmentConfig
 import numpy as np
 
 if __name__=="__main__":
-    garment_config=GarmentConfig(usd_path="/home/user/GarmentLab/Assets/Garment/Tops/NoCollar_Lsleeve_FrontClose/TNLC_Dress057/TNLC_Dress057_obj.usd",pos=np.array([0,-0.95,0.3]),ori=np.array([0,0,0]),particle_contact_offset=0.01)
+    garment_config=GarmentConfig(usd_path="/home/isaac/GarmentLab/Assets/Garment/Tops/NoCollar_Lsleeve_FrontClose/TNLC_Dress057/TNLC_Dress057_obj.usd",pos=np.array([0,-0.95,0.3]),ori=np.array([0,0,0]),particle_contact_offset=0.01)
     env=FoldEnv(garment_config=[garment_config],
                 franka_config=FrankaConfig(ori=[np.array([0,0,-np.pi/2])]))
     env.reset()

@@ -1,5 +1,5 @@
 import sys
-sys.path.append("/home/user/GarmentLab")
+sys.path.append("/home/isaac/GarmentLab")
 from Env.env.PileEnv import PileEnv
 from Env.Config.GarmentConfig import GarmentConfig
 from Env.Config.FrankaConfig import FrankaConfig  
@@ -7,11 +7,11 @@ import numpy as np
 
 if __name__=="__main__":
     
-    pile0_path="/home/user/GarmentLab/Assets/Garment/Dress/Long_ShortSleeve/DLSS_Dress074/DLSS_Dress074_obj.usd"
-    pile1_path="/home/user/GarmentLab/Assets/Garment/Tops/Collar_Lsleeve_FrontClose/TCLC_082/TCLC_082_obj.usd"
-    pile2_path="/home/user/GarmentLab/Assets/Garment/Tops/Collar_Lsleeve_FrontClose/TCLC_Top612/TCLC_Top612_obj.usd"
-    pile3_path="/home/user/GarmentLab/Assets/Garment/Tops/Collar_Lsleeve_FrontClose/TCLC_top117/TCLC_top117_obj.usd"
-    pile4_path="/home/user/GarmentLab/Assets/Garment/Trousers/Short/PS_Short141/PS_Short141_obj.usd"
+    pile0_path="/home/isaac/GarmentLab/Assets/Garment/Dress/Long_ShortSleeve/DLSS_Dress074/DLSS_Dress074_obj.usd"
+    pile1_path="/home/isaac/GarmentLab/Assets/Garment/Tops/Collar_Lsleeve_FrontClose/TCLC_082/TCLC_082_obj.usd"
+    pile2_path="/home/isaac/GarmentLab/Assets/Garment/Tops/Collar_Lsleeve_FrontClose/TCLC_Top612/TCLC_Top612_obj.usd"
+    pile3_path="/home/isaac/GarmentLab/Assets/Garment/Tops/Collar_Lsleeve_FrontClose/TCLC_top117/TCLC_top117_obj.usd"
+    pile4_path="/home/isaac/GarmentLab/Assets/Garment/Trousers/Short/PS_Short141/PS_Short141_obj.usd"
 
     
     garment_config_list = list()

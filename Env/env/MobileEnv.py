@@ -3,7 +3,7 @@ import sys
 
 from isaacsim import SimulationApp
 
-sys.path.append("/home/isaac/GarmentLab/")
+# sys.path.append("/home/isaac/GarmentLab/")
 
 app = SimulationApp({"headless": False})
 

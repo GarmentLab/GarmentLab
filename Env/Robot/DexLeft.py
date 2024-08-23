@@ -17,8 +17,8 @@ from Env.Utils.transforms import quat_diff_rad
 class DexLeft(Robot):
     def __init__(self, cfg: DexConfig):
         self.env = cfg.env
-        self.app = cfg.app
-        self.recording = False
+        # self.app = cfg.app
+        # self.recording = False
 
         self._name = "DexLeft" if cfg.name is None else cfg.name
         self._prim_path = "/World/DexLeft" if cfg.prim_path is None else cfg.prim_path

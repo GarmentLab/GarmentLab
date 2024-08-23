@@ -112,8 +112,3 @@ class Deformable:
     def set_rest_offset(self,rest_offset:float=0.008):
         self.collsionapi=PhysxSchema.PhysxCollisionAPI.Apply(self.deformable.prim)
         self.collsionapi.GetRestOffsetAttr().Set(rest_offset)
-
-        
-        
-    
-        

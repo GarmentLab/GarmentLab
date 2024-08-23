@@ -9,8 +9,8 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser()  
     
     parser.add_argument('--epoch_num', type=int, required=True)  
-    parser.add_argument('--train_path', type=str, default="/home/user/isaacgarment/affordance/")  
-    parser.add_argument('--eval_path', type=str, default="/home/user/isaacgarment/affordance/")  
+    parser.add_argument('--train_path', type=str, default="/home/isaac/isaacgarment/affordance/")  
+    parser.add_argument('--eval_path', type=str, default="/home/isaac/isaacgarment/affordance/")  
     parser.add_argument('--task_name', type=str, default="hang")  
     parser.add_argument('--device', type=str, default="cuda:0")  
     

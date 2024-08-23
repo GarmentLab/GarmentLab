@@ -2,7 +2,7 @@ import numpy as np
 from isaacsim import SimulationApp
 import torch
 import sys
-sys.path.append("/home/user/GarmentLab")
+# sys.path.append("/home/isaac/GarmentLab")
 simulation_app = SimulationApp({"headless": False})
 import numpy as np
 

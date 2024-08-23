@@ -20,7 +20,7 @@ class DexRightEnv(BaseEnv):
         configR = DexConfig(env=self, app=app, translation=np.array([0, -0.5, 0.5]))
         configL = DexConfig(env=self, app=app, translation=np.array([0, 0.5, 0.5]))
         garment_config = GarmentConfig(
-            usd_path="/home/user/GarmentLab/Assets/Garment/Tops/Hooded_Lsleeve_FrontOpen/THLO_Jacket065/THLO_Jacket065_obj.usd",
+            usd_path="/home/isaac/GarmentLab/Assets/Garment/Tops/Hooded_Lsleeve_FrontOpen/THLO_Jacket065/THLO_Jacket065_obj.usd",
             pos=np.array([1, -0.6, 0.3]), 
             ori=np.array([0, 0, 0]),
             visual_material_usd=None,
@@ -55,7 +55,7 @@ class DexRightEnv(BaseEnv):
 
 env = DexRightEnv()
 env.reset()
-env.replay("Assets/Replays/20240806-08:47:16.npy")
+env.replay("/home/isaac/GarmentLab/Assets/Replays/20240806-08_47_16.npy")
 
 while True:
     env.step()

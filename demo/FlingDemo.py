@@ -7,7 +7,7 @@ import torch
 
 
 if __name__=="__main__":
-        config = GarmentConfig(usd_path="/home/user/GarmentLab/Assets/Garment/Dress/Long_ShortSleeve/DLSS_Dress074/DLSS_Dress074_obj.usd")
+        config = GarmentConfig(usd_path="/home/isaac/GarmentLab/Assets/Garment/Dress/Long_ShortSleeve/DLSS_Dress074/DLSS_Dress074_obj.usd")
         config.pos = np.array([0.12837,0.09307,-0.06812])
         config.ori = np.array([0.09024,0.07689,0.57673,0.80829])
         config.scale = np.array([0.006, 0.006, 0.006])

@@ -38,7 +38,7 @@ class TactileFranka:
             self._franka_robot_name=robot_name
 
         self.init_position=Position
-        self.world.scene.add(Franka(prim_path=self._franka_prim_path,usd_path="/home/user/Tactile/IsaacTac/Robot/Franka/franka.usd",name=self._franka_robot_name,position=Position))
+        self.world.scene.add(Franka(prim_path=self._franka_prim_path,usd_path="/home/isaac/Tactile/IsaacTac/Robot/Franka/franka.usd",name=self._franka_robot_name,position=Position))
         self._robot:Franka=self.world.scene.get_object(self._franka_robot_name)
         self.process_franka_gripper()
         self._articulation_controller=self._robot.get_articulation_controller()

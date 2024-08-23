@@ -9,7 +9,7 @@ import yaml
 
 if __name__=="__main__":
 
-    filename = "/home/user/GarmentLab/LearningBaseline/affordance/config/config_5.yaml"
+    filename = "/home/isaac/GarmentLab/LearningBaseline/affordance/config/config_5.yaml"
     with open(filename, 'r') as file:
         task_config = yaml.safe_load(file)
 

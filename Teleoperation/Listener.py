@@ -1,7 +1,7 @@
 import sys
-
-sys.path.append("LeapMotion/leap-sdk-python3")
-sys.path.append("Teleoperation/retarget")
+sys.path.append("/home/isaac/GarmentLab")
+sys.path.append("/home/isaac/GarmentLab/Assets/LeapMotion/leap-sdk-python3")
+sys.path.append("/home/isaac/GarmentLab/Teleoperation/retarget")
 
 import Leap
 import threading
@@ -63,6 +63,7 @@ TRANSFORM_MAT = np.array([[0, 0, -1], [-1, 0, 0], [0, 1, 0]])
 BASE_ROT_MAT_INV = np.array([[0, 0, 1], [-1, 0, 0], [0, 1, 0]])
 ARM_HOME_JOINT_POSITION = [0, -1.25, 2.00, -np.pi / 4, np.pi / 2, 0]
 SCALE = np.array([70, 70, 130])
+HOME_WRIST_POS = np.array([0.9, 0.2, 0.7])
 
 class Listener:
     def watch(self):
@@ -84,6 +85,8 @@ class Listener:
         self.app = app
         self.unregistered = False
         self.handler = thread_handler(self, thread_name)
+        self.cache = { "left": [], "right": [] }
+        self.home_wrist_pos_raw = { }
     
     def launch(self):
         self.handler.start()
@@ -117,5 +120,15 @@ class Listener:
         wrist_pos[0] += 1.6
         wrist_pos[2] -= 1
         wrist_pos[1] += 1.5 if side == "right" else -1.5
+
+        if side not in self.home_wrist_pos_raw:
+            self.cache[side].append(wrist_pos)
+            if len(self.cache[side]) <= 50:
+                return None, None, None, None, None
+            self.home_wrist_pos_raw[side] = sum(self.cache[side]) / len(self.cache[side])
+        
+        wrist_pos = wrist_pos - (self.home_wrist_pos_raw[side] - HOME_WRIST_POS)
+
+
 
         return hand_pose_raw, arm_pose_raw, hand_joint_pose, wrist_pos, wrist_ori

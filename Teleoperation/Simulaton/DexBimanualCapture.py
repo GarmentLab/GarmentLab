@@ -63,7 +63,7 @@ env = Dexbimanual()
 env.reset()
 env.listener.launch()
 
-env.record()
+# env.record()
 
 while env.context.is_playing():
     env.step()
@@ -81,4 +81,4 @@ while env.context.is_playing():
         env.robotL.step(wrist_posL, wrist_oriL, angular_type="euler")
         env.robotL.set_joint_positions(hand_joint_poseL, env.robotL.hand_dof_indices)
 
-env.stop_record()
+# env.stop_record()

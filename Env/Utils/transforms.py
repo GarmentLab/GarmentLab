@@ -5,6 +5,7 @@ from omni.isaac.core.utils.rotations import euler_angles_to_quat as turn
 from typing import Tuple
 import numpy as np
 import torch
+
 def euler_angles_to_quat(ori:Tuple[np.ndarray,torch.Tensor]):
     if ori.shape[-1]==3:
         return turn(ori)

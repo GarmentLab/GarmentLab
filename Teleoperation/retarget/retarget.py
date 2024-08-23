@@ -4,7 +4,7 @@ import os
 import sys
 import time
 from typing import List, Optional, Tuple
-sys.path.append("/home/user/projects/shadow_robot/base/src/sr_interface/shadow-hand-ros-inside/src")
+sys.path.append("/home/isaac/projects/shadow_robot/base/src/sr_interface/shadow-hand-ros-inside/src")
 import numpy as np
 from align import best_fit_transform
 from const import HAND_KEYPOINT_NAMES, HAND_VISULIZATION_LINKS
@@ -17,8 +17,8 @@ from visualization import (
     plot_hand_motion_keypoints,
     plot_two_hands_motion_keypoints,
 )
-from std_msgs.msg import Float64MultiArray
-import rospy
+# from std_msgs.msg import Float64MultiArray
+# import rospy
 import _thread
 
 joint = np.random.rand(21, 3)
@@ -90,17 +90,17 @@ def extend_pinky(keypoints: np.ndarray) -> np.ndarray:
     return keypoints
 
 
-# thread publisher
-def thread_publisher(thredName):
-    pub = rospy.Publisher('hand_joint_value', Float64MultiArray, queue_size=1000)
-    rate = rospy.Rate(10)
+# # thread publisher
+# def thread_publisher(thredName):
+#     pub = rospy.Publisher('hand_joint_value', Float64MultiArray, queue_size=1000)
+#     rate = rospy.Rate(10)
 
-    while not rospy.is_shutdown():
-        latest = optimize(joint)
-        latest = latest.tolist()
-        mess = Float64MultiArray(data=latest)
-        pub.publish(mess)
-        rate.sleep()
+#     while not rospy.is_shutdown():
+#         latest = optimize(joint)
+#         latest = latest.tolist()
+#         mess = Float64MultiArray(data=latest)
+#         pub.publish(mess)
+#         rate.sleep()
 
 
 
@@ -153,23 +153,23 @@ def callback(data):
 
 
 
-if __name__ == "__main__":
-    # filenames = glob.glob("/home/user/projects/shadow_robot/base/src/sr_interface/shadow-hand-project/retarget/hand_pose/*joint*.npy")
-    # filenames = natsorted(filenames)
-    # target = np.stack([np.load(filename) for filename in filenames])
+# if __name__ == "__main__":
+#     # filenames = glob.glob("/home/isaac/projects/shadow_robot/base/src/sr_interface/shadow-hand-project/retarget/hand_pose/*joint*.npy")
+#     # filenames = natsorted(filenames)
+#     # target = np.stack([np.load(filename) for filename in filenames])
 
-    # target = np.load("/home/user/projects/shadow_robot/base/src/sr_interface/shadow-hand-project/retarget/leap_motion.npy")[::4]
+#     # target = np.load("/home/isaac/projects/shadow_robot/base/src/sr_interface/shadow-hand-project/retarget/leap_motion.npy")[::4]
 
-    # target = target - target[:, 0:1, :]
+#     # target = target - target[:, 0:1, :]
 
-    # plot_hand_motion_keypoints(target)
+#     # plot_hand_motion_keypoints(target)
 
-    # plot_hand_motion_keypoints(target, "target_glove_1.gif")
-    # exit(0)
+#     # plot_hand_motion_keypoints(target, "target_glove_1.gif")
+#     # exit(0)
     
-    rospy.init_node('retarget2robot',anonymous=True)
-    _thread.start_new_thread( thread_publisher, ("Thread-1", ) )
+#     rospy.init_node('retarget2robot',anonymous=True)
+#     _thread.start_new_thread( thread_publisher, ("Thread-1", ) )
 
-    rospy.Subscriber('leap_hand',Float64MultiArray,callback)
-    print("ready\n")
-    rospy.spin()
+#     rospy.Subscriber('leap_hand',Float64MultiArray,callback)
+#     print("ready\n")
+#     rospy.spin()

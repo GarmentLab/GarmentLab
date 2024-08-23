@@ -113,7 +113,7 @@ class RigidVisual():
 
 class RigidStore():
     def __init__(self):
-        add_reference_to_stage(usd_path="/home/user/GarmentLab/Assets/Articulated/cabinet.usd",prim_path="/World")
+        add_reference_to_stage(usd_path="/home/isaac/GarmentLab/Assets/Articulated/cabinet.usd",prim_path="/World")
         # self.rigid_form=XFormPrim(
         #     prim_path="/World/cabinet",
         #     name="cabinet",
