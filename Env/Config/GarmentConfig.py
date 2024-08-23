@@ -29,3 +29,7 @@ class GarmentConfig:
         self.solver_position_iteration_count=16
         self.friction=0.3
         self.visual_material_usd=visual_material_usd
+        self.contact_offset=None
+        self.rest_offset=None
+        self.solid_rest_offset=None
+        self.fluid_rest_offset=None

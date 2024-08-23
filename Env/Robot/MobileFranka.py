@@ -9,24 +9,28 @@ from omni.isaac.franka import KinematicsSolver
 from omni.isaac.core.prims import XFormPrim
 from omni.isaac.manipulators.grippers.parallel_gripper import ParallelGripper
 from omni.isaac.core.utils.prims import get_prim_at_path
+from omni.isaac.core.utils.prims import is_prim_path_valid
+from omni.isaac.core.utils.string import find_unique_string_name
+from omni.isaac.core import World
 
 from pxr import PhysxSchema
 
 from Env.Utils.set_drive import set_drive
 from Env.Utils.transforms import quat_diff_rad
-from Env.Config.DexConfig import DexConfig
+from Env.Config.FrankaConfig import MobileFrankaConfig
 
 class MobileFranka(Robot):
-    def __init__(self, cfg: DexConfig):
-        self.env = cfg.env
-        self.app = cfg.app
-        self._name = "Mobile" if cfg.name is None else cfg.name
-        self._prim_path = "/World/Mobile" if cfg.prim_path is None else cfg.prim_path
+    def __init__(self, world:World,cfg: MobileFrankaConfig):
+        self._name = find_unique_string_name("MobileFranka", is_unique_fn=lambda x: not world.scene.object_exists(x))
+        self._prim_path = find_unique_string_name("/World/MobileFranka", is_unique_fn=lambda x: not is_prim_path_valid(x))
 
-        self.asset_file = os.path.join(os.path.dirname(os.path.abspath(__file__)), "../../Assets/Robots/mfranka.usd")
+        self.asset_file = os.path.join(os.path.dirname(os.path.abspath(__file__)), "/home/user/GarmentLab/Assets/Robots/RidgebackFranka/ridgeback_franka.usd")
 
-        self.translation = cfg.translation
-        self.orientation = cfg.orientation
+        self.translation = cfg.pos
+        self.orientation = cfg.ori
+        
+        if self.orientation.shape[-1]==3:
+            self.orientation = euler_angles_to_quat(self.orientation)
 
         add_reference_to_stage(self.asset_file, self._prim_path)
 
@@ -37,8 +41,8 @@ class MobileFranka(Robot):
             orientation=self.orientation,
             articulation_controller=None,
         )
-
-        self.env.scene.add(self)
+        self.world=world
+        self.world.scene.add(self)
 
         self.ki_solver = KinematicsSolver(self)
         self.ee = XFormPrim(self.prim_path + '/endeffector', 'endeffector')
@@ -127,24 +131,24 @@ class MobileFranka(Robot):
         action, succ = self.ki_solver.compute_inverse_kinematics(target_pos - base_pos, target_ori)
         if succ:
             self._articulation_controller.apply_action(action)
-            self.env.world.step(render=True) 
+            self.world.step(render=True) 
         return succ
     
     def gripper_move_to(self, target_pos: np.ndarray, target_ori: np.ndarray, angular_type = "euler"):
-        self.env.step()
+        self.world.step()
 
         while not self.ee_reached(target_pos, target_ori, angular_type=angular_type):
             succ = self.step(target_pos, target_ori, angular_type)
             if not succ:
                 return False
-            self.env.step()
+            self.world.step()
 
         return True
 
     def base_move_to(self, target: np.ndarray, velocity = 2.0):
-        self.env.step()
+        self.world.step()
         while not self.base_position_reached(target):
-            self.env.step()
+            self.world.step()
             current_pos, _ = self.base.get_world_pose()
             delta_pos = target - current_pos
             delta_pos[2] = 0
@@ -169,13 +173,13 @@ class MobileFranka(Robot):
         return reduce_rad(z2 - z1)
 
     def base_face_to(self, target: np.ndarray, velocity = 0.3, threshold = 3):
-        self.env.step()
+        self.world.step()
 
         threshold = threshold * np.pi / 180
         delta_t = 0.1
 
         while np.abs(self.angle(target)) > threshold:
-            self.env.step()
+            self.world.step()
             diff = self.angle(target)
             z = self.get_joint_positions([2]).item()
             self.set_joint_positions([z + delta_t * (velocity if diff > 0 else -velocity)], [2])

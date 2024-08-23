@@ -124,3 +124,21 @@ class RigidStore():
                                 position=np.array([0.00282,0.0,0.5]),
                                 scale=np.array([0.02,0.02,0.02]),
                                 visible=True)
+        
+class RigidTable:
+    def __init__(self,world:World):
+        add_reference_to_stage("/home/user/GarmentLab/Assets/Scene/Willow.usd","/World/table")  
+        self.table_rigid_prim:RigidPrim=world.scene.add(RigidPrim(
+            prim_path="/World/table",
+            name="table",
+            position=np.array([0,0,0]),
+            scale=np.array([0.01,0.02,0.01]),
+        ))
+        self.table_geo_prim:GeometryPrim=world.scene.add(GeometryPrim(
+            prim_path="/World/table",
+            collision=True
+        ))
+        self.table_geo_prim.set_collision_approximation("convexHull")
+        self.table_geo_prim.set_contact_offset(0.01)
+        
+        

@@ -25,44 +25,43 @@ from Env.Garment.Garment import Garment
 from Env.Robot.Franka.MyFranka import MyFranka
 from Env.env.Control import Control
 from Env.Config.GarmentConfig import GarmentConfig
-from Env.Config.FrankaConfig import FrankaConfig
+from Env.Config.FrankaConfig import MobileFrankaConfig
 from Env.Config.DeformableConfig import DeformableConfig
+from Env.Garment.TableCloth import TableCloth
+from Env.Rigid.Rigid import RigidTable
+from Env.Robot.MobileFranka import MobileFranka
 import open3d as o3d
 
-class FoldEnv(BaseEnv):
-    def __init__(self,garment_config:GarmentConfig=None,franka_config:FrankaConfig=None,Deformable_Config:DeformableConfig=None):
+class MakeTableEnv(BaseEnv):
+    def __init__(self,garment_config:GarmentConfig=None,franka_config:MobileFrankaConfig=None,Deformable_Config:DeformableConfig=None):
         BaseEnv.__init__(self,garment=True)
         if garment_config is None:
             self.garment_config=[GarmentConfig(ori=np.array([0,0,0]))]
         else:
             self.garment_config=garment_config
-        self.garment:list[Garment]=[]
+        self.garment:list[TableCloth]=[]
         for garment_config in self.garment_config:
-            self.garment.append(Garment(self.world,garment_config))
-        if franka_config is None:
-            self.franka_config=FrankaConfig()
-        else:
-            self.franka_config=franka_config
-        self.robots=self.import_franka(self.franka_config)
-        self.control=Control(self.world,self.robots,[self.garment[0]])
+            self.garment.append(TableCloth(self.world,garment_config))
+
+        self.robot_config=MobileFrankaConfig(pos=[np.array([1.2,1.2,0])])
+            
+        self.robot=MobileFranka(self.world,self.robot_config)
+            
+        self.table=RigidTable(self.world)
+        # self.robots=self.import_franka(self.franka_config)
+        # self.control=Control(self.world,self.robots,[self.garment[0]])
+        
+
+if __name__=="__main__":
+    cloth_config=GarmentConfig(usd_path=None,pos=np.array([0,0,1]),scale=np.array([2,2,1]),ori=np.array([0,0,0]))
+    cloth_config.particle_contact_offset=0.01
+    cloth_config.friction=0.7
+    cloth_config.solid_rest_offset=0.008
+    env=MakeTableEnv([cloth_config])
+    env.reset()
+    env.robot.base_move_to(np.array([-1.2,1.2,0]))
+    while 1:
+        env.step()
         
 
 
-if __name__=="__main__":
-    env=FoldEnv()
-    env.reset()
-    # env.control.grasp([np.array([0.5,-0.1,0.04])],[None],[True])
-    # env.control.move([np.array([0.5,-0.1,0.5])],[None],[True])
-    # env.control.ungrasp([False])
-    # env.control.grasp([np.array([0.5,-0.1,0.04])],[None],[True])
-    # env.control.move([np.array([0.5,-0.1,0.5])],[None],[True])
-    # env.control.ungrasp([False])
-    step=0
-    while 1:
-        env.step()
-        step+=1
-        if step%100==0:
-            points=env.garment[0].get_realvertices_positions().reshape(-1,3)
-            pcd=o3d.geometry.PointCloud()
-            pcd.points=o3d.utility.Vector3dVector(points)
-            o3d.visualization.draw_geometries([pcd])

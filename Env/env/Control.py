@@ -243,10 +243,10 @@ class Control:
                     robot_pos=torch.from_numpy(robot_pos)
                 if isinstance(robot_ori,np.ndarray):
                     robot_ori=torch.from_numpy(robot_ori)
-                a=self.Rotation(robot_ori,self.grasp_offset)
+                a=self.Rotation(robot_ori,self.grasp_offset).to("cuda")
                 block_handle:AttachmentBlock=self.attachlist[id]
                 block_cur_pos=block_handle.get_position()
-                block_cur_pos=torch.from_numpy(block_cur_pos)
+                # block_cur_pos=torch.from_numpy(block_cur_pos)
                 block_next_pos=robot_pos+a
                 block_velocity=(block_next_pos-block_cur_pos)/(self.world.get_physics_dt()*3)
                 # if torch.norm(block_cur_pos-block_next_pos)<0.01:

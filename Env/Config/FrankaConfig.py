@@ -16,3 +16,15 @@ class FrankaConfig:
                 self.ori[i]=torch.from_numpy(ori[i])
                 
 
+class MobileFrankaConfig:
+    def __init__(self,franka_num:int=1,pos=np.array([0,0,0]),ori=np.array([0,0,0])):
+        self.franka_num=franka_num
+        self.pos=pos
+        self.ori=ori
+        if isinstance(pos,np.ndarray):
+            self.pos=torch.from_numpy(pos)
+        if isinstance(ori,np.ndarray):
+            self.ori=torch.from_numpy(ori)
+                
+                
+
