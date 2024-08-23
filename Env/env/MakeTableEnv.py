@@ -47,7 +47,7 @@ class MakeTableEnv(BaseEnv):
             
         self.robot=MobileFranka(self.world,self.robot_config)
             
-        self.table=RigidTable(self.world)
+        # self.table=RigidTable(self.world)
         # self.robots=self.import_franka(self.franka_config)
         # self.control=Control(self.world,self.robots,[self.garment[0]])
         

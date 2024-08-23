@@ -24,7 +24,7 @@ class MobileFranka(Robot):
         self._name = find_unique_string_name("MobileFranka", is_unique_fn=lambda x: not world.scene.object_exists(x))
         self._prim_path = find_unique_string_name("/World/MobileFranka", is_unique_fn=lambda x: not is_prim_path_valid(x))
 
-        self.asset_file = os.path.join(os.path.dirname(os.path.abspath(__file__)), "/home/user/GarmentLab/Assets/Robots/RidgebackFranka/ridgeback_franka.usd")
+        self.asset_file = os.path.join(os.path.dirname(os.path.abspath(__file__)), "/home/isaac/GarmentLab/Assets/Robots/RidgebackFranka/ridgeback_franka.usd")
 
         self.translation = cfg.pos
         self.orientation = cfg.ori

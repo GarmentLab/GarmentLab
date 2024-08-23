@@ -3,7 +3,7 @@ import numpy as np
 from typing import Union
 
 class GarmentConfig:
-    def __init__(self,usd_path:str="/home/user/GarmentLab/Assets/Garment/Tops/Collar_Lsleeve_FrontClose/TCLC_074/TCLC_074_obj.usd",pos:Union[torch.Tensor,np.ndarray]=np.array([0.5,-0.5,0.3]),ori:Union[torch.Tensor,np.ndarray]=np.array([0,0,np.pi/2]),scale:np.ndarray=np.array([0.005,0.005,0.005]),visual_material_usd:str="/home/user/GarmentLab/Assets/Material/linen_Pumpkin.usd",particle_contact_offset:float=0.02):
+    def __init__(self,usd_path:str="/home/user/GarmentLab/Assets/Garment/Tops/Collar_Lsleeve_FrontClose/TCLC_074/TCLC_074_obj.usd",pos:Union[torch.Tensor,np.ndarray]=np.array([0.5,-0.5,0.3]),ori:Union[torch.Tensor,np.ndarray]=np.array([0,0,np.pi/2]),scale:np.ndarray=np.array([0.005,0.005,0.005]),visual_material_usd:str="/home/isaac/GarmentLab/Assets/Material/linen_Pumpkin.usd",particle_contact_offset:float=0.02):
         self.usd_path=usd_path
         if isinstance(pos,np.ndarray):
             self.pos=torch.from_numpy(pos)
