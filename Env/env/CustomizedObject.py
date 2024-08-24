@@ -15,13 +15,13 @@ import numpy as np
 class CustomizedObject(BaseEnv):
     def __init__(self):
         BaseEnv.__init__(self,deformable=True)
-        self.deformable_config=DeformableConfig(usd_path="/home/user/GarmentLab/Assets/RealWorld/12_WinnieBear/12_mesh.usd",
+        self.deformable_config=DeformableConfig(usd_path="/home/isaac/GarmentLab/Assets/RealWorld/12_WinnieBear/12_mesh.usd",
                                                 scale=np.array([0.001,0.001,0.001]),
                                                 pos=np.array([0.3,0.5,0.3]),
                                                 visual_material_usd=None,
                                                 ori=np.array([np.pi/5,np.pi/2,0]))
         self.deformable=Deformable(self.world,self.deformable_config)
-        self.garment_config=GarmentConfig(usd_path="/home/user/GarmentLab/Assets/Garment/Tops/Hooded_Lsleeve_FrontOpen/THLO_Jacket065/THLO_Jacket065_obj.usd",
+        self.garment_config=GarmentConfig(usd_path="/home/isaac/GarmentLab/Assets/Garment/Tops/Hooded_Lsleeve_FrontOpen/THLO_Jacket065/THLO_Jacket065_obj.usd",
                                         #   visual_material_usd=None,
                                           pos=np.array([1,-0.3,0.3]),)
         self.garment=Garment(self.world,self.garment_config)

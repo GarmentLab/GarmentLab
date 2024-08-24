@@ -113,7 +113,7 @@ class RigidVisual():
 
 class RigidStore():
     def __init__(self):
-        add_reference_to_stage(usd_path="/home/user/GarmentLab/Assets/Articulated/cabinet.usd",prim_path="/World")
+        add_reference_to_stage(usd_path="/home/isaac/GarmentLab/Assets/Articulated/cabinet.usd",prim_path="/World")
         # self.rigid_form=XFormPrim(
         #     prim_path="/World/cabinet",
         #     name="cabinet",
@@ -127,7 +127,7 @@ class RigidStore():
         
 class RigidTable:
     def __init__(self,world:World):
-        add_reference_to_stage("/home/user/GarmentLab/Assets/Scene/Willow.usd","/World/table")  
+        add_reference_to_stage("/home/isaac/GarmentLab/Assets/Scene/Willow.usd","/World/table")  
         self.table_rigid_prim:RigidPrim=world.scene.add(RigidPrim(
             prim_path="/World/table",
             name="table",

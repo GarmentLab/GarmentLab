@@ -40,14 +40,14 @@ class ClothDemoEnv(BaseEnv):
 
 if __name__=="__main__":
     garment_config_list=[]
-    garment_config1=GarmentConfig(usd_path="/home/user/GarmentLab/Assets/Garment/Dress/Long_LongSleeve/DLLS_Dress355/DLLS_Dress355_obj.usd",
-                                  visual_material_usd="/home/user/GarmentLab/Assets/Material/linen_Beige.usd",
+    garment_config1=GarmentConfig(usd_path="/home/isaac/GarmentLab/Assets/Garment/Dress/Long_LongSleeve/DLLS_Dress355/DLLS_Dress355_obj.usd",
+                                  visual_material_usd="/home/isaac/GarmentLab/Assets/Material/linen_Beige.usd",
                                   pos=np.array([0,-1,0.5]),particle_contact_offset=0.01)
-    garment_config2=GarmentConfig(usd_path="/home/user/GarmentLab/Assets/Garment/Dress/Long_LongSleeve/DLLS_Dress355/DLLS_Dress355_obj.usd",
-                                  visual_material_usd="/home/user/GarmentLab/Assets/Material/linen_Beige.usd",
+    garment_config2=GarmentConfig(usd_path="/home/isaac/GarmentLab/Assets/Garment/Dress/Long_LongSleeve/DLLS_Dress355/DLLS_Dress355_obj.usd",
+                                  visual_material_usd="/home/isaac/GarmentLab/Assets/Material/linen_Beige.usd",
                                   pos=np.array([0,0,0.5]),particle_contact_offset=0.02)
-    garment_config3=GarmentConfig(usd_path="/home/user/GarmentLab/Assets/Garment/Dress/Long_LongSleeve/DLLS_Dress355/DLLS_Dress355_obj.usd",
-                                  visual_material_usd="/home/user/GarmentLab/Assets/Material/linen_Beige.usd",
+    garment_config3=GarmentConfig(usd_path="/home/isaac/GarmentLab/Assets/Garment/Dress/Long_LongSleeve/DLLS_Dress355/DLLS_Dress355_obj.usd",
+                                  visual_material_usd="/home/isaac/GarmentLab/Assets/Material/linen_Beige.usd",
                                   pos=np.array([0,1,0.5]),particle_contact_offset=0.04)
     garment_config_list.append(garment_config1)
     garment_config_list.append(garment_config2)

@@ -69,7 +69,7 @@ class BimanualEnv(BaseEnv):
             self.world.step()
         pts = self.garment[garment_id].get_vertice_positions()
         pts = self.Rotation(rotation,pts)
-        path = "/home/sim/GarmentLab/Assets/succ_example/fling_test_example.txt"
+        path = "/home/isaac/GarmentLab/Assets/succ_example/fling_test_example.txt"
         np.savetxt(path, pts)
         coverage_trial = self.get_current_covered_area(pts)
         self.world.stop()
@@ -78,7 +78,7 @@ class BimanualEnv(BaseEnv):
         for i in range(20):
             self.world.step()
         pts = self.garment[garment_id].get_vertice_positions()
-        path = "/home/sim/GarmentLab/Assets/succ_example/fling_standard_example.txt"
+        path = "/home/isaac/GarmentLab/Assets/succ_example/fling_standard_example.txt"
         np.savetxt(path, pts)
         coverage_standard = self.get_current_covered_area(pts)
         if  coverage_trial/coverage_standard > 0.75:

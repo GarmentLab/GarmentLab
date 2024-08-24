@@ -4,7 +4,7 @@ import os
 import sys
 import time
 from typing import List, Optional, Tuple
-sys.path.append("/home/user/projects/shadow_robot/base/src/sr_interface/shadow-hand-ros-inside/src")
+sys.path.append("/home/isaac/projects/shadow_robot/base/src/sr_interface/shadow-hand-ros-inside/src")
 import numpy as np
 from align import best_fit_transform
 from const import HAND_KEYPOINT_NAMES, HAND_VISULIZATION_LINKS
@@ -17,8 +17,8 @@ from visualization import (
     plot_hand_motion_keypoints,
     plot_two_hands_motion_keypoints,
 )
-from std_msgs.msg import Float64MultiArray
-import rospy
+# from std_msgs.msg import Float64MultiArray
+# import rospy
 import _thread
 
 joint = np.random.rand(21, 3)
@@ -154,11 +154,11 @@ def callback(data):
 
 
 if __name__ == "__main__":
-    # filenames = glob.glob("/home/user/projects/shadow_robot/base/src/sr_interface/shadow-hand-project/retarget/hand_pose/*joint*.npy")
+    # filenames = glob.glob("/home/isaac/projects/shadow_robot/base/src/sr_interface/shadow-hand-project/retarget/hand_pose/*joint*.npy")
     # filenames = natsorted(filenames)
     # target = np.stack([np.load(filename) for filename in filenames])
 
-    # target = np.load("/home/user/projects/shadow_robot/base/src/sr_interface/shadow-hand-project/retarget/leap_motion.npy")[::4]
+    # target = np.load("/home/isaac/projects/shadow_robot/base/src/sr_interface/shadow-hand-project/retarget/leap_motion.npy")[::4]
 
     # target = target - target[:, 0:1, :]
 

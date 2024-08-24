@@ -5,7 +5,7 @@ import torch.nn.functional as F
 import glob
 import os
 
-def preprocess(task_name = "hang",data_root_path = "/home/user/isaacgarment/affordance/", coeff=np.array([1,1,100]), device = "cuda:0"):
+def preprocess(task_name = "hang",data_root_path = "/home/isaac/isaacgarment/affordance/", coeff=np.array([1,1,100]), device = "cuda:0"):
     data_dir_path = os.path.join(data_root_path,f"{task_name}_*")
     data_dir_list = glob.glob(data_dir_path)
     trial_pts_list = list()

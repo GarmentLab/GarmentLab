@@ -20,11 +20,11 @@ from Env.Utils.transforms import quat_diff_rad
 from Env.Config.FrankaConfig import MobileFrankaConfig
 
 class MobileFranka(Robot):
-    def __init__(self, world:World,cfg: MobileFrankaConfig):
+    def __init__(self, world: World, cfg: MobileFrankaConfig):
         self._name = find_unique_string_name("MobileFranka", is_unique_fn=lambda x: not world.scene.object_exists(x))
         self._prim_path = find_unique_string_name("/World/MobileFranka", is_unique_fn=lambda x: not is_prim_path_valid(x))
 
-        self.asset_file = os.path.join(os.path.dirname(os.path.abspath(__file__)), "/home/isaac/GarmentLab/Assets/Robots/RidgebackFranka/ridgeback_franka.usd")
+        self.asset_file = os.path.join(os.path.dirname(os.path.abspath(__file__)), "../../Assets/Robots/mfranka.usd")
 
         self.translation = cfg.pos
         self.orientation = cfg.ori
@@ -88,9 +88,9 @@ class MobileFranka(Robot):
             "panda_link6/panda_joint7": { "drive_type": "angular", "target_type": "position", "default_pos": math.degrees(0.8), "stiffness": 6.98, "damping": 1.40, "max_force": 12, "max_velocity": 149.5 },
             "panda_hand/panda_finger_joint1": { "drive_type": "linear", "target_type": "position", "default_pos": 0.02, "stiffness": 1e4, "damping": 100, "max_force": 200, "max_velocity": 0.2 },
             "panda_hand/panda_finger_joint2": { "drive_type": "linear", "target_type": "position", "default_pos": 0.02, "stiffness": 1e4, "damping": 100, "max_force": 200, "max_velocity": 0.2 }, 
-            "world/dummy_base_prismatic_x_joint": { "drive_type": "linear", "target_type": "velocity", "default_pos": 0.0, "stiffness": 0.0, "damping": 1e6, "max_force": 4800 },
-            "dummy_base_x/dummy_base_prismatic_y_joint": { "drive_type": "linear", "target_type": "velocity", "default_pos": 0.0, "stiffness": 0.0, "damping": 1e6, "max_force": 4800 },
-            "dummy_base_y/dummy_base_revolute_z_joint": { "drive_type": "angular", "target_type": "velocity", "default_pos": 0.0, "stiffness": 0.0, "damping": 1e6, "max_force": 4800 }
+            "world/dummy_base_prismatic_x_joint": { "drive_type": "linear", "target_type": "velocity", "default_pos": 0.0, "stiffness": 1e4, "damping": 0, "max_force": 4800 },
+            "dummy_base_x/dummy_base_prismatic_y_joint": { "drive_type": "linear", "target_type": "velocity", "default_pos": 0.0, "stiffness": 1e4, "damping": 0, "max_force": 4800 },
+            "dummy_base_y/dummy_base_revolute_z_joint": { "drive_type": "angular", "target_type": "velocity", "default_pos": 0.0, "stiffness": 1e4, "damping": 0, "max_force": 4800 }
         }
 
         for joint_name, config in self.joints_config.items():

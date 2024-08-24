@@ -1,5 +1,5 @@
 import sys
-sys.path.append("/home/user/GarmentLab")
+sys.path.append("/home/isaac/GarmentLab")
 from Env.env.HumanEnv import HumanEnv
 from Env.Config.GarmentConfig import GarmentConfig
 from Env.Config.FrankaConfig import FrankaConfig  

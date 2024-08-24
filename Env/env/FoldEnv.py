@@ -17,7 +17,7 @@ from omni.isaac.franka import KinematicsSolver
 from omni.isaac.core.utils.types import ArticulationAction
 import torch
 import sys
-sys.path.append("/home/user/GarmentLab/")
+sys.path.append("/home/isaac/GarmentLab/")
 from Env.Utils.transforms import euler_angles_to_quat
 from Env.Utils.transforms import quat_diff_rad
 from Env.env.BaseEnv import BaseEnv

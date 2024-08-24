@@ -7,7 +7,7 @@ import numpy as np
 
 if __name__=="__main__":
     
-    garment_config = GarmentConfig(usd_path="/home/user/GarmentLab/Assets/Garment/Dress/Long_ShortSleeve/DLSS_Dress182/DLSS_Dress182_obj.usd")
+    garment_config = GarmentConfig(usd_path="/home/isaac/GarmentLab/Assets/Garment/Dress/Long_ShortSleeve/DLSS_Dress182/DLSS_Dress182_obj.usd")
     garment_config.pos = np.array([-0.65481,-1.27712,0.54132])
     garment_config.ori = np.array([0.47366,-0.32437,-0.46264,-0.67557])
     garment_config.scale = np.array([0.006, 0.006, 0.006])
