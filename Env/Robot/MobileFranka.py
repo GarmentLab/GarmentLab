@@ -19,6 +19,48 @@ from Env.Utils.set_drive import set_drive
 from Env.Utils.transforms import quat_diff_rad
 from Env.Config.FrankaConfig import MobileFrankaConfig
 
+
+import omni.isaac.motion_generation as mg
+from omni.isaac.core.articulations import Articulation
+
+
+class RMPFlowController(mg.MotionPolicyController):
+    """[summary]
+
+    Args:
+        name (str): [description]
+        robot_articulation (Articulation): [description]
+        physics_dt (float, optional): [description]. Defaults to 1.0/60.0.
+    """
+
+    def __init__(self, name: str, robot_articulation: Articulation, physics_dt: float = 1.0 / 60.0) -> None:
+        self.rmp_flow_config = mg.interface_config_loader.load_supported_motion_policy_config("Franka", "RMPflow")
+        self.rmp_flow = mg.lula.motion_policies.RmpFlow(**self.rmp_flow_config)
+
+        self.articulation_rmp = mg.ArticulationMotionPolicy(robot_articulation, self.rmp_flow, physics_dt)
+
+        mg.MotionPolicyController.__init__(self, name=name, articulation_motion_policy=self.articulation_rmp)
+        (
+            self._default_position,
+            self._default_orientation,
+        ) = self._articulation_motion_policy._robot_articulation.get_world_pose()
+        self._motion_policy.set_robot_base_pose(
+            robot_position=self._default_position, robot_orientation=self._default_orientation
+        )
+        return
+
+    def reset(self):
+        mg.MotionPolicyController.reset(self)
+        self._motion_policy.set_robot_base_pose(
+            robot_position=self._default_position, robot_orientation=self._default_orientation
+        )
+    
+    def mobile_reset(self, position: np.ndarray, orientation: np.ndarray):
+        self._motion_policy.set_robot_base_pose(
+            robot_position=position, robot_orientation=orientation
+        )
+
+
 class MobileFranka(Robot):
     def __init__(self, world: World, cfg: MobileFrankaConfig):
         self._name = find_unique_string_name("MobileFranka", is_unique_fn=lambda x: not world.scene.object_exists(x))
@@ -45,6 +87,7 @@ class MobileFranka(Robot):
         self.world.scene.add(self)
 
         self.ki_solver = KinematicsSolver(self)
+
         self.ee = XFormPrim(self.prim_path + '/endeffector', 'endeffector')
         self.franka_base = XFormPrim(self.prim_path + '/panda_link0', 'panda_link')
         self.base = XFormPrim(self.prim_path + '/base_link', 'base_link')
@@ -60,7 +103,27 @@ class MobileFranka(Robot):
             joint_closed_positions = self.gripper_closed_position,
             action_deltas = self.deltas
         )
+        self.default_ee_ori=np.array([0,np.pi,0])
+        self.controller=RMPFlowController("RMPFlowController",self)
+        
+    def reach(self,pos,ori=None):
+        if ori is None:
+            return self.ee_position_reached(pos)
+        else:
+            return self.ee_reached(pos,ori)
 
+    def open(self):
+        for _ in range(10):
+            self.gripper.open()
+            self.world.step(render=True)
+    
+    def close(self):
+        for _ in range(10):
+            self.gripper.close()
+            self.world.step(render=True)
+            
+    def get_cur_ee_pos(self):
+        return self.ee.get_world_pose()
     def initialize(self, physics_sim_view):
         super().initialize(physics_sim_view)
 
@@ -99,15 +162,17 @@ class MobileFranka(Robot):
                       config["default_pos"], config["stiffness"], config["damping"], config["max_force"])
             if config.get("max_velocity") is not None:
                 PhysxSchema.PhysxJointAPI(get_prim_at_path(absolute_path)).CreateMaxJointVelocityAttr().Set(config["max_velocity"])
+    def get_prim_path(self):
+        return self._prim_path
 
-    def base_position_reached(self, target: np.ndarray, threshold = 0.7):
+    def base_position_reached(self, target: np.ndarray, threshold = 0.001):
         current_pos, _ = self.base.get_world_pose()
         delta_pos = target - current_pos
         delta_pos[2] = 0
         distance = np.linalg.norm(delta_pos)
         return distance < threshold
     
-    def ee_orientation_reached(self, target: np.ndarray, threshold = 0.05, angular_type = "euler"):
+    def ee_orientation_reached(self, target: np.ndarray, threshold = 0.01, angular_type = "euler"):
         if angular_type == "euler":
             target = euler_angles_to_quat(target)
 
@@ -116,37 +181,54 @@ class MobileFranka(Robot):
         angle_diff = quat_diff_rad(R, target)[0]
         return angle_diff < threshold
     
-    def ee_position_reached(self, target: np.ndarray, threshold = 0.2):
+    def ee_position_reached(self, target: np.ndarray, threshold = 0.01):
         current_pos, _ = self.ee.get_world_pose()
+        # print("ee_current_pos",current_pos)
         return np.linalg.norm(current_pos - target) < threshold
     
-    def ee_reached(self, target_pos: np.ndarray, target_ori: np.ndarray, pos_threshold = 0.2, 
-                   ori_threshold = 0.05, angular_type = "euler"):
-        return self.ee_position_reached(target_pos, pos_threshold) and self.ee_orientation_reached(target_ori, ori_threshold, angular_type)
+    def ee_reached(self, target_pos: np.ndarray, target_ori: np.ndarray, pos_threshold = 0.01, 
+                   ori_threshold = 0.01, angular_type = "euler"):
+        if target_ori is not None:
+            return self.ee_position_reached(target_pos, pos_threshold) and self.ee_orientation_reached(target_ori, ori_threshold, angular_type)
+        else:
+            return self.ee_position_reached(target_pos, pos_threshold)
         
-    def step(self, target_pos: np.ndarray, target_ori: np.ndarray, angular_type = "euler"):
+    def move(self, target_pos: np.ndarray, target_ori: np.ndarray=None, angular_type = "euler"):
         if angular_type == "euler":
             target_ori = euler_angles_to_quat(target_ori)
-        base_pos, _ = self.get_world_pose()
-        action, succ = self.ki_solver.compute_inverse_kinematics(target_pos - base_pos, target_ori)
-        if succ:
-            self._articulation_controller.apply_action(action)
-            self.world.step(render=True) 
-        return succ
+        # action, succ = self.ki_solver.compute_inverse_kinematics(target_pos, target_ori)
+        # if succ:
+        #     self._articulation_controller.apply_action(action)
+        #     self.world.step(render=True) 
+        # return succ
+        actions=self.controller.forward(
+            target_pos,
+            target_ori
+        )
+        self._articulation_controller.apply_action(actions)
+        self.world.step(render=True)
+        return True
     
-    def gripper_move_to(self, target_pos: np.ndarray, target_ori: np.ndarray, angular_type = "euler"):
+    def get_franka_base_pose(self):
+        return self.franka_base.get_world_pose()
+    
+    def gripper_move_to(self, target_pos: np.ndarray, target_ori: np.ndarray=None, angular_type = "euler"):
         self.world.step()
+        # if target_ori==None:
+        #     target_ori = self.default_ee_ori
+        
+        franka_base_pos, franka_base_ori = self.get_franka_base_pose()
+        self.controller.mobile_reset(franka_base_pos, franka_base_ori)
 
         while not self.ee_reached(target_pos, target_ori, angular_type=angular_type):
-            succ = self.step(target_pos, target_ori, angular_type)
-            if not succ:
-                return False
-            self.world.step()
+            succ = self.move(target_pos, target_ori, angular_type)
+            # self.world.step()
 
         return True
 
     def base_move_to(self, target: np.ndarray, velocity = 2.0):
         self.world.step()
+        franka_joint=self.get_joint_positions(np.arange(6)+4)
         while not self.base_position_reached(target):
             self.world.step()
             current_pos, _ = self.base.get_world_pose()
@@ -156,8 +238,12 @@ class MobileFranka(Robot):
 
             dof_vel = delta_pos * velocity
             self.set_joint_velocities(dof_vel, self.base_dof_indicies)
+            # self.set_joint_positions(franka_joint,np.arange(6)+4)
             
         self.set_joint_velocities(np.zeros((3, )), self.base_dof_indicies)
+        z = self.get_joint_positions([2]).item()
+        self.set_joint_positions([z], [2])
+        
 
     def angle(self, target: np.ndarray):
         def reduce_rad(angle):
@@ -177,12 +263,14 @@ class MobileFranka(Robot):
 
         threshold = threshold * np.pi / 180
         delta_t = 0.1
-
+        franka_joint=self.get_joint_positions(np.arange(5)+5)
         while np.abs(self.angle(target)) > threshold:
             self.world.step()
             diff = self.angle(target)
             z = self.get_joint_positions([2]).item()
             self.set_joint_positions([z + delta_t * (velocity if diff > 0 else -velocity)], [2])
+            # # self.set_joint_positions(franka_joint,np.arange(5)+5)
+            # self.set_joint_positions(np.concatenate(([z + delta_t * (velocity if diff > 0 else -velocity)],franka_joint)),np.concatenate(([2],np.arange(5)+5))) 
 
     
     

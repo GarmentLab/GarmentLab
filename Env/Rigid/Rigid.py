@@ -127,7 +127,7 @@ class RigidStore():
         
 class RigidTable:
     def __init__(self,world:World):
-        add_reference_to_stage("/home/isaac/GarmentLab/Assets/Scene/Willow.usd","/World/table")  
+        add_reference_to_stage("/home/user/GarmentLab/Assets/Scene/Willow.usd","/World/table")  
         self.table_rigid_prim:RigidPrim=world.scene.add(RigidPrim(
             prim_path="/World/table",
             name="table",
@@ -140,5 +140,8 @@ class RigidTable:
         ))
         self.table_geo_prim.set_collision_approximation("convexHull")
         self.table_geo_prim.set_contact_offset(0.01)
+    
+    def get_prim_path(self):
+        return self.table_rigid_prim.prim_path
         
         

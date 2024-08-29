@@ -51,7 +51,7 @@ class AttachmentBlock():
         self.block_prim=prim
         # self.world.scene.add(prim)
         self.move_block_controller=self.block_prim._rigid_prim_view
-        #self.move_block_controller.disable_gravities()
+        self.move_block_controller.disable_gravities()
         self.collision_group.CreateIncludesRel().AddTarget(self.block_path)
         return self.move_block_controller
 
@@ -85,15 +85,17 @@ class AttachmentBlock():
 
 
 class Control:
-    def __init__(self,world:World,robot:list[MyFranka],garment:list[Garment]):
+    def __init__(self,world:World,robot:list[MyFranka],garment:list[Garment],rigid=None):
         self.world=world
         self.robot=robot
         self.garment=garment
         # assert len(self.robot)==len(self.garment), "The number of robot and garment must be the same"
         self.stage=self.world.stage
         self.grasp_offset=torch.tensor([0.,0.,-0.01])
+        self.rigid=rigid
         self.collision_group()
         self.attachlist=[None]*len(self.robot)
+
 
         
     def collision_group(self):
@@ -135,6 +137,8 @@ class Control:
         
         self.collectionAPI_rigid = Usd.CollectionAPI.Apply(self.filter_rigid.GetPrim(), "colliders")
         self.collectionAPI_rigid.CreateIncludesRel().AddTarget("/World/Avatar")
+        for rigid in self.rigid:
+            self.collectionAPI_rigid.CreateIncludesRel().AddTarget(rigid.get_prim_path())
        
     
     def make_attachment(self,position:list,flag:list[bool]):
@@ -152,7 +156,7 @@ class Control:
                 self.attachlist[i].block_control.disable_gravities()
 
 
-    def robot_goto_position(self,pos:list,ori:list,flag:list[bool],max_limit=300):
+    def robot_goto_position(self,pos:list,ori:list,flag:list[bool],max_limit=10000):
         cur_step=0
         self.world.step()
         while 1:
@@ -222,7 +226,7 @@ class Control:
         
         
             
-    def move(self,pos:list,ori:list,flag:list[bool],max_limit=500):
+    def move(self,pos:list,ori:list,flag:list[bool],max_limit=1000):
         '''
         move_function
         pos: list of robots target position
@@ -243,7 +247,7 @@ class Control:
                     robot_pos=torch.from_numpy(robot_pos)
                 if isinstance(robot_ori,np.ndarray):
                     robot_ori=torch.from_numpy(robot_ori)
-                a=self.Rotation(robot_ori,self.grasp_offset).to("cuda")
+                a=self.Rotation(robot_ori,self.grasp_offset)
                 block_handle:AttachmentBlock=self.attachlist[id]
                 block_cur_pos=block_handle.get_position()
                 # block_cur_pos=torch.from_numpy(block_cur_pos)

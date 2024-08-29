@@ -17,7 +17,7 @@ from omni.isaac.franka import KinematicsSolver
 from omni.isaac.core.utils.types import ArticulationAction
 import torch
 import sys
-sys.path.append("/home/isaac/GarmentLab/")
+sys.path.append("/home/user/GarmentLab/")
 from Env.Utils.transforms import euler_angles_to_quat
 from Env.Utils.transforms import quat_diff_rad
 from Env.env.BaseEnv import BaseEnv
@@ -46,10 +46,11 @@ class MakeTableEnv(BaseEnv):
         self.robot_config=MobileFrankaConfig(pos=[np.array([1.2,1.2,0])])
             
         self.robot=MobileFranka(self.world,self.robot_config)
+        self.robots=[self.robot]
             
-        # self.table=RigidTable(self.world)
+        self.table=RigidTable(self.world)
         # self.robots=self.import_franka(self.franka_config)
-        # self.control=Control(self.world,self.robots,[self.garment[0]])
+        self.control=Control(self.world,self.robots,[self.garment[0]],[self.table])
         
 
 if __name__=="__main__":
@@ -59,7 +60,11 @@ if __name__=="__main__":
     cloth_config.solid_rest_offset=0.008
     env=MakeTableEnv([cloth_config])
     env.reset()
-    env.robot.base_move_to(np.array([-1.2,1.2,0]))
+    env.robot.base_move_to(np.array([-1.3,1.3,0]))
+    env.robot.base_face_to(np.array([0,0,0]))
+    env.robot.gripper_move_to(np.array([-0.6,0.6,0.75]))
+    env.control.grasp([np.array([-0.6,0.6,0.75])],[None],[True])
+    env.control.move([np.array([-0.6,0.6,1])],[None],[True])
     while 1:
         env.step()
         
