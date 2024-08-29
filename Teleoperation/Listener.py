@@ -62,8 +62,8 @@ class thread_handler(threading.Thread):
 TRANSFORM_MAT = np.array([[0, 0, -1], [-1, 0, 0], [0, 1, 0]])
 BASE_ROT_MAT_INV = np.array([[0, 0, 1], [-1, 0, 0], [0, 1, 0]])
 ARM_HOME_JOINT_POSITION = [0, -1.25, 2.00, -np.pi / 4, np.pi / 2, 0]
-SCALE = np.array([70, 70, 130])
-HOME_WRIST_POS = np.array([0.9, 0.2, 0.7])
+SCALE = np.array([130, 130, 130])
+HOME_WRIST_POS = np.array([0.9, 0.0, 0.7])
 
 class Listener:
     def watch(self):

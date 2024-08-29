@@ -24,8 +24,9 @@ class Dexbimanual(BaseEnv):
         configL = DexConfig(env=self, app=app, translation=np.array([0, 0.5, 0.5]))
         garment_config = GarmentConfig(
             usd_path="/home/isaac/GarmentLab/Assets/Garment/Tops/Hooded_Lsleeve_FrontOpen/THLO_Jacket065/THLO_Jacket065_obj.usd",
-            pos=np.array([1, -0.6, 0.3]), 
-            ori=np.array([0, 0, 0])
+            pos=np.array([1.2, -1, 0.3]), 
+            ori=np.array([0, 0, 0]), 
+            scale=np.array([0.01, 0.01, 0.01])
         )
 
         self.garment = Garment(self.world, garment_config)
@@ -63,7 +64,7 @@ env = Dexbimanual()
 env.reset()
 env.listener.launch()
 
-# env.record()
+env.record()
 
 while env.context.is_playing():
     env.step()
@@ -81,4 +82,4 @@ while env.context.is_playing():
         env.robotL.step(wrist_posL, wrist_oriL, angular_type="euler")
         env.robotL.set_joint_positions(hand_joint_poseL, env.robotL.hand_dof_indices)
 
-# env.stop_record()
+env.stop_record()

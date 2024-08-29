@@ -8,13 +8,13 @@ import numpy as np
 
 if __name__=="__main__":
     
-    config0 = GarmentConfig(usd_path="/media/sim/WD_BLACK/ClothesNetData/ClothesNetM_usd/Hat/HA_Hat007/HA_Hat007_obj.usd")
+    config0 = GarmentConfig(usd_path="/home/isaac/GarmentLab/Assets/Garment/Hat/HA_Hat007/HA_Hat007_obj.usd")
     config0.pos = np.array([-0.62169,-0.5502,-0.1472])
     config0.ori = np.array([0.70711,0.70711,0.0,0.0])
     config0.scale = np.array([0.0075, 0.0075, 0.0075])
     config0.particle_contact_offset = 0.01
 
-    config1 = GarmentConfig(usd_path="/media/sim/WD_BLACK/ClothesNetData/ClothesNetM_usd/Scarf_Tie/ST_Scarf-005/ST_Scarf-005_obj.usd")
+    config1 = GarmentConfig(usd_path="/home/isaac/GarmentLab/Assets/Garment/Hat/HA_Hat007/HA_Hat007_obj.usd")
     config1.pos = np.array([-0.62169,0.54238,0.4472])
     config1.ori = np.array([0.70711,0.70711,0.0,0.0])
     config1.scale = np.array([0.0075, 0.0075, 0.0075])

@@ -49,7 +49,7 @@ class DexRightEnv(BaseEnv):
 
 env = DexRightEnv()
 env.reset()
-env.replay("Assets/Replays/20240806-08:27:54.npy")
+env.replay("Assets/Replays/20240824-06:03:58.npy")
 
 while True:
     env.step()

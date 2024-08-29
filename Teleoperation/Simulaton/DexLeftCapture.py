@@ -13,6 +13,8 @@ from Env.Config.DexConfig import DexConfig
 from Env.Config.GarmentConfig import GarmentConfig
 from Env.Garment.Garment import Garment
 
+from omni.isaac.core.objects import DynamicCuboid, FixedCuboid, VisualCuboid
+
 class DexLeftCapture(BaseEnv):
     def __init__(self):
         super().__init__()
@@ -25,6 +27,14 @@ class DexLeftCapture(BaseEnv):
         self.robot = DexLeft(config)
         self.listener = Listener(app, "handler")
         self.appended_info = []
+
+        self.pedestal = VisualCuboid(
+            prim_path = "/World/pedestal", 
+            name = "pedestal", 
+            position = np.array([0, 0, 0.25]), 
+            scale = np.array([0.2, 0.2, 0.5]),
+            color = np.array([0.5, 0.5, 0.5])
+        )
 
     def record_callback(self, step_size):
         self.savings.append({ "joint_pos": self.robot.get_joint_positions(), "appended_info": self.appended_info })
