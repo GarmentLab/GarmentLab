@@ -242,7 +242,7 @@ class Control:
                 if not flag[id]:
                     continue
                 robot_pos,robot_ori=self.robot[id].get_cur_ee_pos()
-                print(robot_pos)
+                # print(robot_pos)
                 if isinstance(robot_pos,np.ndarray):
                     robot_pos=torch.from_numpy(robot_pos)
                 if isinstance(robot_ori,np.ndarray):

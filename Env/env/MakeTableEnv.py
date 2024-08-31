@@ -65,6 +65,7 @@ if __name__=="__main__":
     env.robot.gripper_move_to(np.array([-0.6,0.6,0.75]))
     env.control.grasp([np.array([-0.6,0.6,0.75])],[None],[True])
     env.control.move([np.array([-0.6,0.6,1])],[None],[True])
+    env.control.ungrasp([False])
     while 1:
         env.step()
         
