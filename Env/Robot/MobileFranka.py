@@ -165,7 +165,7 @@ class MobileFranka(Robot):
     def get_prim_path(self):
         return self._prim_path
 
-    def base_position_reached(self, target: np.ndarray, threshold = 0.001):
+    def base_position_reached(self, target: np.ndarray, threshold = 0.01):
         current_pos, _ = self.base.get_world_pose()
         delta_pos = target - current_pos
         delta_pos[2] = 0
@@ -194,7 +194,7 @@ class MobileFranka(Robot):
             return self.ee_position_reached(target_pos, pos_threshold)
         
     def move(self, target_pos: np.ndarray, target_ori: np.ndarray=None, angular_type = "euler"):
-        if angular_type == "euler":
+        if angular_type == "euler" and target_ori is not None:
             target_ori = euler_angles_to_quat(target_ori)
         # action, succ = self.ki_solver.compute_inverse_kinematics(target_pos, target_ori)
         # if succ:
@@ -228,7 +228,7 @@ class MobileFranka(Robot):
 
     def base_move_to(self, target: np.ndarray, velocity = 2.0):
         self.world.step()
-        franka_joint=self.get_joint_positions(np.arange(6)+4)
+        franka_joint_pos = self.get_joint_positions(self.franka_dof_indicies)
         while not self.base_position_reached(target):
             self.world.step()
             current_pos, _ = self.base.get_world_pose()
@@ -238,6 +238,7 @@ class MobileFranka(Robot):
 
             dof_vel = delta_pos * velocity
             self.set_joint_velocities(dof_vel, self.base_dof_indicies)
+            self.set_joint_positions(franka_joint_pos, self.franka_dof_indicies)
             # self.set_joint_positions(franka_joint,np.arange(6)+4)
             
         self.set_joint_velocities(np.zeros((3, )), self.base_dof_indicies)
@@ -264,11 +265,16 @@ class MobileFranka(Robot):
         threshold = threshold * np.pi / 180
         delta_t = 0.1
         franka_joint=self.get_joint_positions(np.arange(5)+5)
+
+        franka_joint_pos = self.get_joint_positions(self.franka_dof_indicies)
+
         while np.abs(self.angle(target)) > threshold:
             self.world.step()
             diff = self.angle(target)
             z = self.get_joint_positions([2]).item()
+
             self.set_joint_positions([z + delta_t * (velocity if diff > 0 else -velocity)], [2])
+            self.set_joint_positions(franka_joint_pos, self.franka_dof_indicies)
             # # self.set_joint_positions(franka_joint,np.arange(5)+5)
             # self.set_joint_positions(np.concatenate(([z + delta_t * (velocity if diff > 0 else -velocity)],franka_joint)),np.concatenate(([2],np.arange(5)+5))) 
 

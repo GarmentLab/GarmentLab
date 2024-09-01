@@ -127,7 +127,7 @@ class RigidStore():
         
 class RigidTable:
     def __init__(self,world:World):
-        add_reference_to_stage("/home/user/GarmentLab/Assets/Scene/Willow.usd","/World/table")  
+        add_reference_to_stage("/home/isaac/GarmentLab/Assets/Scenes/Willow.usd","/World/table")  
         self.table_rigid_prim:RigidPrim=world.scene.add(RigidPrim(
             prim_path="/World/table",
             name="table",

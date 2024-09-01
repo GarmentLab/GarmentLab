@@ -72,7 +72,7 @@ class Garment:
             shear_stiffness=self.garment_config.shear_stiffness,
             spring_damping=self.garment_config.spring_damping,
         )
-        self.world.scene.add(self.garment_mesh)
+        # self.world.scene.add(self.garment_mesh)
         self.particle_controller = self.garment_mesh._cloth_prim_view
         if self.garment_config.visual_material_usd is not None:
             self.apply_visual_material(self.garment_config.visual_material_usd)

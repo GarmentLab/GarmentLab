@@ -2,7 +2,7 @@ import numpy as np
 import torch
 
 class DeformableConfig:
-    def __init__(self,usd_path:str="/home/user/GarmentLab/Assets/Garment/Hat/HA_Hat007/HA_Hat007_obj.usd",pos:np.ndarray=None,ori:np.ndarray=None,scale:np.ndarray=None,visual_material_usd:str="/home/isaac/GarmentLab/Assets/Material/linen_Pumpkin.usd",youngs_modulus:float=None):
+    def __init__(self,usd_path:str="/home/isaac/GarmentLab/Assets/Garment/Hat/HA_Hat007/HA_Hat007_obj.usd",pos:np.ndarray=None,ori:np.ndarray=None,scale:np.ndarray=None,visual_material_usd:str="/home/isaac/GarmentLab/Assets/Material/linen_Pumpkin.usd",youngs_modulus:float=None):
         if pos is None:
             self.pos=np.array([0.6,1.3,0.3])
         else:
