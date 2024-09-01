@@ -171,6 +171,8 @@ class MobileFranka(Robot):
         delta_pos[2] = 0
         distance = np.linalg.norm(delta_pos)
         return distance < threshold
+
+
     
     def ee_orientation_reached(self, target: np.ndarray, threshold = 0.01, angular_type = "euler"):
         if angular_type == "euler":
@@ -278,7 +280,7 @@ class MobileFranka(Robot):
             # # self.set_joint_positions(franka_joint,np.arange(5)+5)
             # self.set_joint_positions(np.concatenate(([z + delta_t * (velocity if diff > 0 else -velocity)],franka_joint)),np.concatenate(([2],np.arange(5)+5))) 
 
-    
+        self.set_joint_velocities(np.zeros_like(self.franka_dof_indicies), self.franka_dof_indicies)
     
     
         

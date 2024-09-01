@@ -132,7 +132,7 @@ class RigidTable:
             prim_path="/World/table",
             name="table",
             position=np.array([0,0,0]),
-            scale=np.array([0.01,0.02,0.01]),
+            scale=np.array([0.008,0.016,0.008]),
         ))
         self.table_geo_prim:GeometryPrim=world.scene.add(GeometryPrim(
             prim_path="/World/table",

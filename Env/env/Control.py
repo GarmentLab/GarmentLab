@@ -45,7 +45,7 @@ class AttachmentBlock():
         prim = DynamicCuboid(prim_path=self.block_path, color=np.array([1.0, 0.0, 0.0]),
                     name=self.cube_name,
                     position=self.init_place,
-                    scale=np.array([0.02, 0.02, 0.02]),
+                    scale=np.array([0.03, 0.03, 0.03]),
                     mass=1000,
                     visible=False)
         self.block_prim=prim
@@ -221,11 +221,6 @@ class Control:
         for i in range(30):
             self.world.step()
         self.robot_close(flag)
-    
-                    
-        
-        
-            
     def move(self,pos:list,ori:list,flag:list[bool],max_limit=1000):
         '''
         move_function

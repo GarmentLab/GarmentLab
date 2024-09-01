@@ -86,7 +86,7 @@ class TableCloth:
             
     def import_table_cloth(self):
         plane_mesh = UsdGeom.Mesh.Define(self.stage, self.garment_mesh_prim_path)
-        tri_points, tri_indices = deformableUtils.create_triangle_mesh_square(dimx=100, dimy=100, scale=1.0)
+        tri_points, tri_indices = deformableUtils.create_triangle_mesh_square(dimx=100, dimy=100, scale=0.7)
         plane_mesh.GetPointsAttr().Set(tri_points)
         plane_mesh.GetFaceVertexIndicesAttr().Set(tri_indices)
         plane_mesh.GetFaceVertexCountsAttr().Set([3] * (len(tri_indices) // 3))

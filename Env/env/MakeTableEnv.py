@@ -42,10 +42,10 @@ class MakeTableEnv(BaseEnv):
         self.garment:list[TableCloth]=[]
         for garment_config in self.garment_config:
             cloth = TableCloth(self.world,garment_config)
-            cloth.set_mass(1)
+            cloth.set_mass(0.5)
             self.garment.append(cloth)
 
-        self.robot_config=MobileFrankaConfig(pos=[np.array([1.2,1.2,0])])
+        self.robot_config=MobileFrankaConfig(pos=[np.array([1,1,0])])
             
         self.robot=MobileFranka(self.world,self.robot_config)
         self.robots=[self.robot]
@@ -58,27 +58,65 @@ class MakeTableEnv(BaseEnv):
 if __name__=="__main__":
     cloth_config=GarmentConfig(usd_path=None,pos=np.array([0,0,1]),scale=np.array([2,2,1]),ori=np.array([0,0,0]))
     cloth_config.particle_contact_offset=0.01
-    cloth_config.friction=0.7
+    cloth_config.friction=1
     cloth_config.solid_rest_offset=0.008
     env=MakeTableEnv([cloth_config])
     env.reset()
 
-    env.robot.base_move_to(np.array([-1.3, 1.3, 0]), velocity = 1)
+    for _ in range(1000):
+        env.step()
+
+    env.robot.base_move_to(np.array([-1.1, 1, 0]), velocity = 1)
     env.robot.base_face_to(np.array([0, 0, 0]))
 
-    env.robot.gripper_move_to(np.array([-0.6, 0.6, 0.75]))
-    env.control.grasp([np.array([-0.6, 0.6, 0.75])], [None], [True])
-    env.control.move([np.array([-0.6, 0.4, 1])], [None], [True])
+    env.robot.gripper_move_to(np.array([-0.55, 0.6, 0.6]))
+    env.control.grasp([np.array([-0.55, 0.6, 0.6])], [None], [True])
+    env.control.move([np.array([-0.2, 0.15, 0.7])], [None], [True])
     env.control.ungrasp([False])
 
     env.robot.gripper_move_to(np.array([-0.6, 0.6, 1]))
-    env.robot.base_move_to(np.array([1.2, 1.2, 0]), velocity = 1)
+    env.robot.base_move_to(np.array([1, 1, 0]), velocity = 1)
+    env.robot.base_face_to(np.array([0, 0, 0]))
+    
+    env.robot.gripper_move_to(np.array([0.55, 0.6, 0.6]))
+    env.control.grasp([np.array([0.55, 0.6, 0.6])], [None], [True])
+    env.control.move([np.array([0.2, 0.2, 0.7])], [None], [True])
+    env.control.ungrasp([False])
+
+    env.robot.base_face_to(np.array([-3, 1, 0]))
+    env.robot.base_move_to(np.array([3, 1, 0]), velocity = 1)
+
+    env.robot.base_move_to(np.array([1, 1, 0]), velocity = 1)
+    env.robot.base_face_to(np.array([0, 0, 0]))
+
+    env.robot.gripper_move_to(np.array([0.2, 0.2, 0.644]))
+    env.control.grasp([np.array([0.2, 0.2, 0.644])], [None], [True])
+    env.control.move([np.array([0.3, 0.3, 0.7])], [None], [True])
+    env.control.ungrasp([False])
+
+    env.robot.gripper_move_to(np.array([0.3, 0.3, 0.66]))
+    env.control.grasp([np.array([0.3, 0.3, 0.66])], [None], [True])
+    env.control.move([np.array([0.6, 0.6, 0.7])], [None], [True])
+    env.control.ungrasp([False])
+
+    env.robot.gripper_move_to(np.array([0.6, 0.6, 1]))
+    env.robot.base_move_to(np.array([-1.1, 1, 0]), velocity = 1)
     env.robot.base_face_to(np.array([0, 0, 0]))
     env.robot.set_joint_velocities(np.zeros_like(env.robot.franka_dof_indicies), env.robot.franka_dof_indicies)
-    env.robot.gripper_move_to(np.array([0.6, 0.6, 0.75]))
-    
-    env.control.grasp([np.array([0.6, 0.6, 0.75])], [None], [True])
-    env.control.move([np.array([0.5, 0.4, 1])], [None], [True])
+
+    env.robot.gripper_move_to(np.array([-0.2, 0.2, 0.644]))
+    env.control.grasp([np.array([-0.2, 0.2, 0.644])], [None], [True])
+    env.control.move([np.array([-0.3, 0.3, 0.7])], [None], [True])
+    env.control.ungrasp([False])
+
+    env.robot.gripper_move_to(np.array([-0.3, 0.3, 0.66]))
+    env.control.grasp([np.array([-0.3, 0.3, 0.66])], [None], [True])
+    env.control.move([np.array([-0.58, 0.65, 0.7])], [None], [True])
+    env.control.ungrasp([False])
+
+    env.robot.gripper_move_to(np.array([-0.55, 0.6, 0.66]))
+    env.control.grasp([np.array([-0.55, 0.6, 0.66])], [None], [True])
+    env.control.move([np.array([-0.6, 0.64, 0.75])], [None], [True])
     env.control.ungrasp([False])
     
     while 1:
