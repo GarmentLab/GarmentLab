@@ -137,8 +137,9 @@ class Control:
         
         self.collectionAPI_rigid = Usd.CollectionAPI.Apply(self.filter_rigid.GetPrim(), "colliders")
         self.collectionAPI_rigid.CreateIncludesRel().AddTarget("/World/Avatar")
-        for rigid in self.rigid:
-            self.collectionAPI_rigid.CreateIncludesRel().AddTarget(rigid.get_prim_path())
+        if self.rigid is not None:
+            for rigid in self.rigid:
+                self.collectionAPI_rigid.CreateIncludesRel().AddTarget(rigid.get_prim_path())
        
     
     def make_attachment(self,position:list,flag:list[bool]):
