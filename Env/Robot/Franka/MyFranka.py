@@ -130,8 +130,12 @@ class MyFranka:
         #     if self.position_reached(end_loc) and self.rotation_reached(end_effector_orientation):
         #         return True
         # else:
-        if self.position_reached(end_loc):
-            return True
+        if env_ori is None:
+            if self.position_reached(end_loc):
+                return True
+        else:
+            if self.position_reached(end_loc) and self.rotation_reached(euler_angles_to_quat(env_ori)):
+                return True
 
         
     

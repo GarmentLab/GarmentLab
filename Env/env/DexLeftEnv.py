@@ -31,11 +31,8 @@ class DexLeftEnv(BaseEnv):
 
 env = DexLeftEnv()
 env.reset()
-env.robot.record()
 
-while env.robot.context.is_playing():
+while env.context.is_playing():
     env.step()
     target_pos, target_ori = env.target.get_world_pose()
     env.robot.move_to(target_pos, target_ori, angular_type="quat")
-
-env.robot.record_stop()

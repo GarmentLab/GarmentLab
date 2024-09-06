@@ -20,7 +20,7 @@ from Env.Config.GarmentConfig import GarmentConfig
 import omni.isaac.core.utils.prims as prims_utils
 from omni.isaac.core.materials.preview_surface import PreviewSurface
 
-class Garment:
+class TableCloth:
     def __init__(self,world:World,garment_config:GarmentConfig,particle_system:ParticleSystem=None):
         self.world=world
         self.garment_config=garment_config
@@ -43,6 +43,10 @@ class Garment:
                 global_self_collision_enabled=self.garment_config.global_self_collision_enabled,
                 non_particle_collision_enabled=self.garment_config.non_particle_collision_enabled,
                 solver_position_iteration_count=self.garment_config.solver_position_iteration_count,
+                contact_offset=self.garment_config.contact_offset,
+                rest_offset=self.garment_config.rest_offset,
+                solid_rest_offset=self.garment_config.solid_rest_offset,
+                fluid_rest_offset=self.garment_config.fluid_rest_offset,
             )
         else:
             self.particle_system_path = particle_system.prim_path
@@ -51,15 +55,14 @@ class Garment:
             self.particle_system.set_global_self_collision_enabled(self.garment_config.global_self_collision_enabled)
             self.particle_system.set_solver_position_iteration_count(self.garment_config.solver_position_iteration_count)
 
-        add_reference_to_stage(usd_path=self.usd_path,prim_path=self.garment_prim_path)
-        
+        # add_reference_to_stage(usd_path=self.usd_path,prim_path=self.garment_prim_path)
         self.garment_mesh_prim_path=self.garment_prim_path+"/mesh"
+        
+        self.import_table_cloth()
+        
         self.garment=XFormPrim(
             prim_path=self.garment_prim_path,
             name=self.garment_name,
-            position=self.garment_config.pos,
-            orientation=euler_angles_to_quat(self.garment_config.ori),
-            scale=self.garment_config.scale,
             )
         
         self.garment_mesh=ClothPrim(
@@ -71,11 +74,23 @@ class Garment:
             bend_stiffness=self.garment_config.bend_stiffness,
             shear_stiffness=self.garment_config.shear_stiffness,
             spring_damping=self.garment_config.spring_damping,
+            position=self.garment_config.pos,
+            orientation=euler_angles_to_quat(self.garment_config.ori),
+            scale=self.garment_config.scale,
         )
         # self.world.scene.add(self.garment_mesh)
         self.particle_controller = self.garment_mesh._cloth_prim_view
         if self.garment_config.visual_material_usd is not None:
             self.apply_visual_material(self.garment_config.visual_material_usd)
+            
+            
+    def import_table_cloth(self):
+        plane_mesh = UsdGeom.Mesh.Define(self.stage, self.garment_mesh_prim_path)
+        tri_points, tri_indices = deformableUtils.create_triangle_mesh_square(dimx=100, dimy=100, scale=0.7)
+        plane_mesh.GetPointsAttr().Set(tri_points)
+        plane_mesh.GetFaceVertexIndicesAttr().Set(tri_indices)
+        plane_mesh.GetFaceVertexCountsAttr().Set([3] * (len(tri_indices) // 3))
+        
 
     def set_mass(self,mass):
         physicsUtils.add_mass(self.world.stage, self.garment_mesh_prim_path, mass)

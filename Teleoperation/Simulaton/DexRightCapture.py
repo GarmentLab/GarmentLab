@@ -3,7 +3,6 @@ import numpy as np
 
 from omni.isaac.kit import SimulationApp
 
-
 app = SimulationApp({"headless": False})
 
 from Env.env.BaseEnv import BaseEnv
@@ -54,7 +53,7 @@ env = DexRightCapture()
 env.reset()
 env.listener.launch()
 
-env.record()
+# env.record()
 
 while env.context.is_playing():
     env.step()
@@ -65,4 +64,4 @@ while env.context.is_playing():
         env.robot.step(wrist_pos, wrist_ori, angular_type="euler")
         env.robot.set_joint_positions(hand_joint_pose, env.robot.hand_dof_indices)
 
-env.stop_record()
+# env.stop_record()

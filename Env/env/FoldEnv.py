@@ -15,8 +15,10 @@ from omni.isaac.franka.controllers.pick_place_controller import PickPlaceControl
 from omni.isaac.franka.controllers.rmpflow_controller import RMPFlowController
 from omni.isaac.franka import KinematicsSolver
 from omni.isaac.core.utils.types import ArticulationAction
-from Env.Utils.transforms import euler_angles_to_quat
 import torch
+import sys
+sys.path.append("/home/isaac/GarmentLab/")
+from Env.Utils.transforms import euler_angles_to_quat
 from Env.Utils.transforms import quat_diff_rad
 from Env.env.BaseEnv import BaseEnv
 from Env.Garment.Garment import Garment
@@ -34,7 +36,7 @@ class FoldEnv(BaseEnv):
             self.garment_config=[GarmentConfig(ori=np.array([0,0,0]))]
         else:
             self.garment_config=garment_config
-        self.garment=[]
+        self.garment:list[Garment]=[]
         for garment_config in self.garment_config:
             self.garment.append(Garment(self.world,garment_config))
         if franka_config is None:
@@ -49,11 +51,18 @@ class FoldEnv(BaseEnv):
 if __name__=="__main__":
     env=FoldEnv()
     env.reset()
-    env.control.grasp([np.array([0.5,-0.1,0.04])],[None],[True])
-    env.control.move([np.array([0.5,-0.1,0.5])],[None],[True])
-    env.control.ungrasp([False])
-    env.control.grasp([np.array([0.5,-0.1,0.04])],[None],[True])
-    env.control.move([np.array([0.5,-0.1,0.5])],[None],[True])
-    env.control.ungrasp([False])
+    # env.control.grasp([np.array([0.5,-0.1,0.04])],[None],[True])
+    # env.control.move([np.array([0.5,-0.1,0.5])],[None],[True])
+    # env.control.ungrasp([False])
+    # env.control.grasp([np.array([0.5,-0.1,0.04])],[None],[True])
+    # env.control.move([np.array([0.5,-0.1,0.5])],[None],[True])
+    # env.control.ungrasp([False])
+    step=0
     while 1:
         env.step()
+        step+=1
+        if step%100==0:
+            points=env.garment[0].get_realvertices_positions().reshape(-1,3)
+            pcd=o3d.geometry.PointCloud()
+            pcd.points=o3d.utility.Vector3dVector(points)
+            o3d.visualization.draw_geometries([pcd])

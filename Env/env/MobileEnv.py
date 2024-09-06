@@ -10,6 +10,7 @@ app = SimulationApp({"headless": False})
 from BaseEnv import BaseEnv
 from Env.Robot.MobileFranka import MobileFranka
 from Env.Config.DexConfig import DexConfig
+from Env.Config.FrankaConfig import MobileFrankaConfig
 
 from omni.isaac.core.objects import DynamicCuboid, FixedCuboid, VisualCuboid
 
@@ -17,9 +18,10 @@ class MobileEnv(BaseEnv):
     def __init__(self):
         super().__init__()
 
-        config = DexConfig(env=self, app=app)
+        config = MobileFrankaConfig()
+        # config = DexConfig(env=self, app=app)
 
-        self.robot = MobileFranka(config)
+        self.robot = MobileFranka(self.world, config)
 
         self.target = VisualCuboid(prim_path = "/World/target",
             name = "target",
@@ -33,7 +35,7 @@ env = MobileEnv()
 env.reset()
 
 env.robot.base_move_to(np.array([5, 0, 0]))
-env.robot.set_joint_positions([0], [2])
+# env.robot.set_joint_positions([0], [2])
 env.robot.base_face_to(np.array([0, 0, 0]))
 
 while True:
