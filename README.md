@@ -45,14 +45,14 @@ We provide brief guidance on this page. Please refer to [our documentation](http
 
 |Image|Name|Description|
 |----------|:-------------|:-------------|
-|![Gif](./hang/hang.gif)|[Hang](softgym/envs/cloth_drop.py) | Hang the clothes on the clothesline |
-|![Gif](./hang/fling.gif)|[Fling](softgym/envs/cloth_fold.py) | Unfold the clothes and lay them flat on the floor|
-|![Gif](./hang/wish.gif)|[Wash](softgym/envs/cloth_flatten.py)| Put the scarf into the sink and wash it clean|
-|![Gif](./hang/store.gif)|[Store](softgym/envs/pour_water.py)| Grab the hat and put it in the closet |
-|![Gif](./Phy/demo_fold.gif)|[Fold](softgym/envs/pass_water.py)| Fold the flat-laid piece of clothing neatly|
-|![Gif](./Phy/PhyCloth.gif)|[PhysicsGarment](softgym/envs/rope_flatten.py)| test the performance of garment simulation|
-|![Gif](./Phy/PhyDeformable.gif)|[PhysicsDerformable](softgym/envs/pour_water_amount.py)| test the performance of Deformable simulation|
-|![Gif](./Phy/PhyHat.gif)|[PhysicsHat](softgym/envs/cloth_fold_crumpled.py)| test the performance of Hat simulation| 
+|![Gif](./hang/hang.gif)|[Hang](demo/HangDemo.py) | Hang the clothes on the clothesline |
+|![Gif](./hang/fling.gif)|[Fling](demo/FlingDemo.py) | Unfold the clothes and lay them flat on the floor|
+|![Gif](./hang/wish.gif)|[Wash](demo/WashDemo.py)| Put the scarf into the sink and wash it clean|
+|![Gif](./hang/store.gif)|[Store](demo/StoreDemo.py)| Grab the hat and put it in the closet |
+|![Gif](./Phy/demo_fold.gif)|[Fold](demo/FoldDemo.py)| Fold the flat-laid piece of clothing neatly|
+|![Gif](./Phy/PhyCloth.gif)|[PhysicsGarment](physxDemo/cloth.py)| test the performance of garment simulation|
+|![Gif](./Phy/PhyDeformable.gif)|[PhysicsDerformable](physxDemo/pillow.py)| test the performance of Deformable simulation|
+|![Gif](./Phy/PhyHat.gif)|[PhysicsHat](physxDemo/hat.py)| test the performance of Hat simulation| 
 
 # Get Started
 ## 1. Install Isaac Sim
