@@ -63,7 +63,7 @@ if __name__=="__main__":
     env=MakeTableEnv([cloth_config])
     env.reset()
 
-    for _ in range(1000):
+    for _ in range(10):
         env.step()
 
     env.robot.base_move_to(np.array([-1.1, 1, 0]), velocity = 1)
