@@ -53,7 +53,7 @@ We provide brief guidance on this page. Please refer to [our documentation](http
 | <img src="./Phy/PhyCloth.gif" width="500" height="250" /> |[PhysicsGarment](physxDemo/cloth.py)| test the performance of garment simulation|
 | <img src="./Phy/PhyDeformable.gif" width="500" height="250" /> |[PhysicsDerformable](physxDemo/pillow.py)| test the performance of Deformable simulation|
 |<img src="./Phy/PhyHat.gif" width="500" height="250" /> |[PhysicsHat](physxDemo/hat.py)| test the performance of Hat simulation| 
-| <img src="./hang/maketable.gif" width="500" height="250" /> |[Mobile](physxDemo/hat.py)| Flatten the tablecloth by a mobile Franka| 
+| <img src="./hang/maketable.gif" width="500" height="250" /> |[Mobile](Env/env/MakeTableEnv.py)| Flatten the tablecloth by a mobile Franka| 
 
 # Get Started
 ## 1. Install Isaac Sim
