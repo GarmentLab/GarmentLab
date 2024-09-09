@@ -45,7 +45,7 @@ We provide brief guidance on this page. Please refer to [our documentation](http
 
 |Image|Name|Description|
 |----------|:-------------|:-------------|
-| <img src="./hang/hang.gif" width="500" height="150" /> |[Hang](demo/HangDemo.py) | Hang the clothes on the clothesline |
+| <img src="./hang/hang.gif" width="500" height="250" /> |[Hang](demo/HangDemo.py) | Hang the clothes on the clothesline |
 | <img src="./hang/fling.gif" width="300" height="90" /> |[Fling](demo/FlingDemo.py) | Unfold the clothes and lay them flat on the floor|
 | <img src="./hang/wish.gif" width="300" height="90" /> |[Wash](demo/WashDemo.py)| Put the scarf into the sink and wash it clean|
 | <img src="./hang/store.gif" width="300" height="90" /> |[Store](demo/StoreDemo.py)| Grab the hat and put it in the closet |
