@@ -45,15 +45,15 @@ We provide brief guidance on this page. Please refer to [our documentation](http
 
 |Image|Name|Description|
 |----------|:-------------|:-------------|
-|![Gif](./hang/hang.gif)|[Hang](demo/HangDemo.py) | Hang the clothes on the clothesline |
-|![Gif](./hang/fling.gif)|[Fling](demo/FlingDemo.py) | Unfold the clothes and lay them flat on the floor|
-|![Gif](./hang/wish.gif)|[Wash](demo/WashDemo.py)| Put the scarf into the sink and wash it clean|
-|![Gif](./hang/store.gif)|[Store](demo/StoreDemo.py)| Grab the hat and put it in the closet |
-|![Gif](./Phy/demo_fold.gif)|[Fold](demo/FoldDemo.py)| Fold the flat-laid piece of clothing neatly|
-|![Gif](./Phy/PhyCloth.gif)|[PhysicsGarment](physxDemo/cloth.py)| test the performance of garment simulation|
-|![Gif](./Phy/PhyDeformable.gif)|[PhysicsDerformable](physxDemo/pillow.py)| test the performance of Deformable simulation|
-|<img src="./Phy/PhyHat.gif" width="700" height="400" /> |[PhysicsHat](physxDemo/hat.py)| test the performance of Hat simulation| 
-|![Gif](./hang/maketable.gif)|[Mobile](physxDemo/hat.py)| Flatten the tablecloth by a mobile Franka| 
+| <img src="./hang/hang.gif" width="300" height="90" /> |[Hang](demo/HangDemo.py) | Hang the clothes on the clothesline |
+| <img src="./hang/fling.gif" width="300" height="90" /> |[Fling](demo/FlingDemo.py) | Unfold the clothes and lay them flat on the floor|
+| <img src="./hang/wish.gif" width="300" height="90" /> |[Wash](demo/WashDemo.py)| Put the scarf into the sink and wash it clean|
+| <img src="./hang/store.gif" width="300" height="90" /> |[Store](demo/StoreDemo.py)| Grab the hat and put it in the closet |
+| <img src="./Phy/demo_fold.gif" width="300" height="90" /> |[Fold](demo/FoldDemo.py)| Fold the flat-laid piece of clothing neatly|
+| <img src="./Phy/PhyCloth.gif" width="300" height="90" /> |[PhysicsGarment](physxDemo/cloth.py)| test the performance of garment simulation|
+| <img src="./Phy/PhyDeformable.gif" width="300" height="90" /> |[PhysicsDerformable](physxDemo/pillow.py)| test the performance of Deformable simulation|
+|<img src="./Phy/PhyHat.gif" width="300" height="90" /> |[PhysicsHat](physxDemo/hat.py)| test the performance of Hat simulation| 
+| <img src="./hang/maketable.gif" width="300" height="90" /> |[Mobile](physxDemo/hat.py)| Flatten the tablecloth by a mobile Franka| 
 
 # Get Started
 ## 1. Install Isaac Sim
