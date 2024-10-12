@@ -3,8 +3,9 @@
 </h2>
 
 <div align="center" margin-bottom="6em">
-<b>Neurips 2024(under review)</b>
+<b>NeurIPS 2024</b>
 </div>
+
 
 <div align="center" margin-bottom="6em">
 
@@ -18,10 +19,10 @@
     <img src="https://img.shields.io/badge/Page-Garmentlab-9cf" alt="Project Page"/></a>
     <a href="https://garmentlab.readthedocs.io/en/latest/" target="_blank">
     <img src="https://img.shields.io/badge/docs-passing-brightgreen.svg" alt="Documentation"/></a>
-    <a href="" target="_blank">
+    <a href="https://garmentlab.github.io/static/videos/ID_7401.mp4" target="_blank">
     <img src="https://img.shields.io/badge/Video-Demos-9966ff" alt="Data"/></a>
-    <a href="https://pytorch.org" target="_blank">
-    <img src="https://img.shields.io/badge/Code-PyTorch-blue" alt="PyTorch"/></a>
+    <a href="https://github.com/GarmentLab/GarmentLab" target="_blank">
+    <img src="https://img.shields.io/badge/Code-PyTorch-blue" alt="Github Code"/></a>
 </div>
 &nbsp;
 
@@ -86,10 +87,10 @@ You can find more details to setup [here](https://garmentlab.readthedocs.io/en/l
 
 ## BibTex
 ```bibtex
-@inproceedings{Garmentlab,
+@inproceedings{lu2024garmentlab,
   title={Garmentlab: A Unified Simulation and Benchmark for Garment Manipulation},
-  author={},
-  booktitle={},
+  booktitle={Advances in Neural Information Processing Systems},
+  author={Lu, Haoran and Wu, Ruihai and Li, Yitong and Li, Sijie and Zhu, Ziyu and Ning, Chuanruo and Shen, Yan and Luo, Longzan and Chen, Yuanpei and Dong, Hao},
   year={2024}
 }
 ```
