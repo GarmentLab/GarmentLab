@@ -1,0 +1,38 @@
+demo_point:
+- 0.17027
+- 0.09963
+- 0.02854
+- 0.18869
+- -0.28995
+- 0.02854
+garment_config:
+  garment_ori:
+  - 0.72724
+  - -0.12573
+  - -0.28992
+  - -0.60931
+  garment_path: /home/sim/GarmentLab/Assets/Garment/Dress/Long_ShortSleeve/DLSS_dress144/DLSS_dress144_obj.usd
+  garment_pos:
+  - -0.3138
+  - -0.27982
+  - 0.32647
+  garment_scale:
+  - 0.007
+  - 0.007
+  - 0.007
+garment_name: dress3
+target_point:
+- 0.17027
+- 0.09963
+- 0.82854
+- 0.18869
+- -0.28995
+- 0.82854
+- -0.47027
+- 0.09963
+- 0.02854
+- -0.48869
+- -0.28995
+- 0.02854
+task_name: hang
+block_num: 2
