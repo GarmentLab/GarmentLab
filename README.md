@@ -15,7 +15,7 @@
 <div align="center">
     <a href="" target="_blank">
     <img src="https://img.shields.io/badge/Paper-arXiv-green" alt="Paper arXiv"></a>
-    <a href="https://garmentlab.github.io/" target="_blank">
+    <a href="https://arxiv.org/abs/2411.01200" target="_blank">
     <img src="https://img.shields.io/badge/Page-Garmentlab-9cf" alt="Project Page"/></a>
     <a href="https://garmentlab.readthedocs.io/en/latest/" target="_blank">
     <img src="https://img.shields.io/badge/docs-passing-brightgreen.svg" alt="Documentation"/></a>
