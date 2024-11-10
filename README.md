@@ -34,7 +34,7 @@ We introduce **GarmentLab**, a unified simulation and benchmark designed to addr
 
 - **Diverse Task Coverage**: GarmentLab supports a wide range of tasks involving interactions between garments, deformable objects, rigid bodies, fluids, and human bodies. It covers 11 categories of garments and includes various robotic manipulators, providing 20 tasks across 5 groups, including garment-garment and garment-avatar interactions.
 
-- **Extensive Dataset and Assets**: The benchmark includes a large-scale dataset of garments, robot models, and 3D assets. It features 20 scenes and over 9000 object models, ensuring rich simulation content and diverse task scenarios.
+- **Extensive Dataset and Assets**: The benchmark includes a large-scale dataset of garments, robot models, and 3D assets. It features 20 scenes and over 9000 object models from diverse dataset (ClothesNet, Cloth3D, ShapeNet, PartNet-Mobility, etc), ensuring rich simulation content and diverse task scenarios.
 
 - **Sim-to-Real Gap Bridging**: To address the sim-to-real challenge, GarmentLab integrates methods like Teleoperation and Visual Sim-Real Alignment. These techniques enhance the real-world applicability of trained models by aligning simulation with real-world data.
 
