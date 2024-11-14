@@ -57,7 +57,8 @@ We provide brief guidance on this page. Please refer to [our documentation](http
 | <img src="./hang/maketable.gif" width="500" height="250" /> |[Mobile](Env/env/MakeTableEnv.py)| Flatten the tablecloth by a mobile Franka| 
 
 # Get Started
-## 1. Install Isaac Sim
+## 1. Install Isaac Sim-4.0.0
+Note that our code is based on Isaac Sim-4.0.0, so you need to install Isaac Sim-4.0.0 first.
 
 To install Isaac Sim, please follow the instructions provided in [this tutorial](https://developer.nvidia.com/isaac-sim)
 ## 2. Clone the Code Repository
@@ -79,10 +80,37 @@ cd GarmentLab
 Download the required assets from [this Google Drive link](https://drive.google.com/drive/folders/1CqJILIK8VQ-RCuLa_aFN-WtYTbovpFga?usp=sharing). After downloading, extract the contents into the `Assets` folder within your project directory. Ensure that the folder structure is correct and that all files are properly placed.
 
 
-## 4. Final Steps
+## 4. Install Dependencies
+After install the isaacsim and clone our code, you can locate the [python executable](https://docs.omniverse.nvidia.com/isaacsim/latest/installation/install_python.html) in Isaac Sim. By default, this should be python.sh. We will refer to this path as PYTHON_PATH.
 
-After completing the above steps, verify that all components are correctly installed and configured. Run the initial setup script provided in the repository, if available, to finalize the installation. You can then start working on the project using the provided code and assets.
+To set a PYTHON_PATH variable in the terminal that links to the python executable, we can run a command that resembles the following. Make sure to update the paths to your local path.
+    
+```bash
+For Linux: alias PYTHON_PATH=~/.local/share/ov/pkg/isaac_sim-*/python.sh
+For Windows: doskey PYTHON_PATH=C:\Users\user\AppData\Local\ov\pkg\isaac_sim-*\python.bat $*
+For IsaacSim Docker: alias PYTHON_PATH=/isaac-sim/python.sh
+```
 
+Then you can install the required dependencies by running the following command:
+
+```bash
+PYTHON_PATH -m pip install open3d
+```
+
+## 5. Verify Installation
+To verify that the installation was successful, we will run some sample code of isaacsim, you can run the following command:
+```bash
+PYTHON_PATH ~/.local/share/ov/pkg/isaac_sim-4.0.0/standalone_examples/api/omni.isaac.core/add_cubes.py
+```
+If the code runs successfully, you can see we add some cubes in the scene. If you encounter any issues, please refer to the [Isaac Sim documentation](https://docs.omniverse.nvidia.com/isaacsim/latest/).
+
+## 6. Run the Demos
+After setting up the environment, you can run the demos in the `demo` folder. For example, to run the `Hang` demo, you can run the following command:
+
+Remember to replace path to your assets folder in the demo code.
+```bash
+PYTHON_PATH demo/HangDemo.py
+```
 You can find more details to setup [here](https://garmentlab.readthedocs.io/en/latest/tutorial/setup/index.html)
 
 ## BibTex
