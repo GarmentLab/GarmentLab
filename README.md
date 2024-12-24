@@ -23,6 +23,10 @@
     <img src="https://img.shields.io/badge/Video-Demos-9966ff" alt="Data"/></a>
     <a href="https://github.com/GarmentLab/GarmentLab" target="_blank">
     <img src="https://img.shields.io/badge/Code-PyTorch-blue" alt="Github Code"/></a>
+    <a href="https://drive.google.com/drive/folders/1CqJILIK8VQ-RCuLa_aFN-WtYTbovpFga?usp=sharing" target="_blank">
+    <img src="https://img.shields.io/badge/Download-Assets-red" alt="Assets"/></a>
+    <a href="https://garmentlab.readthedocs.io/en/latest/tutorial/realworldbenchmark/index.html" target="_blank">
+    <img src="https://img.shields.io/badge/Benchmark-RealWorld-orange" alt="RealWorld Benchmark"/></a>
 </div>
 &nbsp;
 
