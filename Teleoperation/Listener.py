@@ -1,8 +1,8 @@
 import sys
-sys.path.append("/home/isaac/GarmentLab")
+sys.path.append("/home/user/GarmentLab")
 
-sys.path.append("/home/isaac/GarmentLab/Assets/LeapMotion/leap-sdk-python3")
-sys.path.append("/home/isaac/GarmentLab/Teleoperation/retarget")
+sys.path.append("/home/user/GarmentLab/Assets/LeapMotion/leap-sdk-python3")
+sys.path.append("/home/user/GarmentLab/Teleoperation/retarget")
 
 import Leap
 import threading
@@ -28,7 +28,7 @@ def leap_hand_to_keypoints(hand) -> np.ndarray:
             keypoints[index, :] = leap_vector_to_numpy(bone.next_joint)
 
     armpoints[0, :] = leap_vector_to_numpy(hand.direction)
-    armpoints[1, :] = leap_vector_to_numpy(hand.palm_normal)  
+    armpoints[1, :] = leap_vector_to_numpy(hand.palm_normal)
     armpoints[2, :] = leap_vector_to_numpy(hand.wrist_position)
     armpoints[3, :] = leap_vector_to_numpy(hand.palm_position)
     return keypoints, armpoints
@@ -56,7 +56,7 @@ class thread_handler(threading.Thread):
     def __init__(self, listener, thread_name):
         self.listener = listener
         threading.Thread.__init__(self, name=thread_name)
-    
+
     def run(self):
         self.listener.watch()
 
@@ -81,23 +81,23 @@ class Listener:
         self.unregistered = True
         controller.remove_listener(self.d_listener)
 
-      
+
     def __init__(self, app, thread_name):
         self.app = app
         self.unregistered = False
         self.handler = thread_handler(self, thread_name)
         self.cache = { "left": [], "right": [] }
         self.home_wrist_pos_raw = { }
-    
+
     def launch(self):
         self.handler.start()
-    
+
     def get_pose(self, side):
         if side not in self.d_listener.hand_pose:
             return None, None, None, None, None
 
         hand_pose_raw, arm_pose_raw = self.d_listener.hand_pose[side], self.d_listener.arm_pose[side]
-        
+
         hand_joint_pose = optimize(hand_pose_raw, side)
 
         # these joints of left hand are mysteriously reversed
@@ -113,7 +113,7 @@ class Listener:
         direction /= np.linalg.norm(direction)
         target_y = np.cross(direction, palm_normal)
         target_y /= np.linalg.norm(target_y)
-        
+
         # rotation matrix of wrist orientation (x: forward, y: left, z: up)
         r = np.array([direction, target_y, palm_normal]).T @ BASE_ROT_MAT_INV
         wrist_ori = R.from_matrix(r).as_euler('xyz')
@@ -127,7 +127,7 @@ class Listener:
             if len(self.cache[side]) <= 50:
                 return None, None, None, None, None
             self.home_wrist_pos_raw[side] = sum(self.cache[side]) / len(self.cache[side])
-        
+
         wrist_pos = wrist_pos - (self.home_wrist_pos_raw[side] - HOME_WRIST_POS)
 
 

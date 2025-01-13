@@ -35,13 +35,13 @@ class AttachmentBlock():
         self.cube_name=find_unique_string_name(initial_name="cube", is_unique_fn=lambda x: not self.world.scene.object_exists(x))
         self.collision_group=collision_group
         self.block_control=self.create()
-   
 
 
-        
+
+
 
     def create(self,):
-        
+
         prim = DynamicCuboid(prim_path=self.block_path, color=np.array([1.0, 0.0, 0.0]),
                     name=self.cube_name,
                     position=self.init_place,
@@ -64,10 +64,10 @@ class AttachmentBlock():
         self.block_prim.set_world_pose(position=grasp_point)
 
     def get_position(self):
-        
+
         pose,_=self.block_prim.get_world_pose()
         return pose
-    
+
     def attach(self,garment:Garment):
         attachment = PhysxSchema.PhysxPhysicsAttachment.Define(self.stage, self.attachment_path)
         attachment.GetActor0Rel().SetTargets([garment.garment_mesh_prim_path])
@@ -76,12 +76,12 @@ class AttachmentBlock():
         att=PhysxSchema.PhysxAutoAttachmentAPI(attachment.GetPrim())
         att.Apply(attachment.GetPrim())
         _=att.CreateDeformableVertexOverlapOffsetAttr(defaultValue=0.02)
-    
+
     def detach(self):
         print(self.block_path)
         delete_prim(self.block_path)
 
-    
+
 
 
 class Control:
@@ -97,7 +97,7 @@ class Control:
         self.attachlist=[None]*len(self.robot)
 
 
-        
+
     def collision_group(self):
         self.rigid_group_path="/World/Collision/Rigid_group"
         self.rigid_group = UsdPhysics.CollisionGroup.Define(self.stage, self.rigid_group_path)
@@ -134,14 +134,14 @@ class Control:
             self.collectionAPI_garment.CreateIncludesRel().AddTarget(garment.particle_system_path)
         self.collectionAPI_attach = Usd.CollectionAPI.Apply(self.filter_attach.GetPrim(), "colliders")
         self.collectionAPI_attach.CreateIncludesRel().AddTarget("/World/Attachment")
-        
+
         self.collectionAPI_rigid = Usd.CollectionAPI.Apply(self.filter_rigid.GetPrim(), "colliders")
         self.collectionAPI_rigid.CreateIncludesRel().AddTarget("/World/Avatar")
         if self.rigid is not None:
             for rigid in self.rigid:
                 self.collectionAPI_rigid.CreateIncludesRel().AddTarget(rigid.get_prim_path())
-       
-    
+
+
     def make_attachment(self,position:list,flag:list[bool]):
         for i in range(len(self.robot)):
             if flag[i] and self.attachlist[i] is None:
@@ -179,30 +179,30 @@ class Control:
             if flag[i]:
                 self.robot[i].move(pos[i],ori[i])
             self.world.step()
-            
+
     def attach(self,object_list,flag:list[bool]):
         for i in range(len(flag)):
             if flag[i]:
                 self.robot[i].close()
                 self.attachlist[i].attach(object_list[0])
-                
+
     def robot_close(self,flag:list[bool]):
         for i in range(len(self.robot)):
             if flag[i]:
                 self.robot[i].close()
-    
+
     def robot_open(self,flag:list[bool]):
         for i in range(len(self.robot)):
             if not flag[i]:
                 self.robot[i].open()
-    
+
     def robot_reset(self):
         self.robot_open([False]*len(self.robot))
-        
-                
-    
-    
-    
+
+
+
+
+
     def grasp(self,pos:list,ori:list,flag:list[bool],assign_garment = None):
         '''
         grasp_function
@@ -254,7 +254,8 @@ class Control:
                 orientation_ped=torch.zeros_like(block_velocity)
                 cmd=torch.cat([block_velocity,orientation_ped],dim=-1)
                 block_handle.set_velocities(cmd)
-                
+                # block_handle.set_position(block_next_pos)
+
             # self.block_reach(self.next_pos_list)
             self.world.step()
             self.world.step()
@@ -288,7 +289,7 @@ class Control:
                 else:
                     self.attachlist[i].move_block_controller.enable_gravities()
                     self.attachlist[i]=None
-                
+
     def Rotation(self,q,vector):
         q0=q[0].item()
         q1=q[1].item()
@@ -303,11 +304,6 @@ class Control:
         )
         vector=torch.mm(vector.unsqueeze(0),R.transpose(1,0))
         return vector.squeeze(0)
-    
+
     def change_garment(self,id,garment):
         self.garment[id]=garment
-            
-            
-        
-        
-        

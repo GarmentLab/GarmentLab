@@ -1,14 +1,14 @@
 import sys
-sys.path.append("/home/isaac/GarmentLab")
+sys.path.append("/home/user/GarmentLab")
 from Env.env.StoreEnv import StoreEnv
 from Env.Config.GarmentConfig import GarmentConfig
-from Env.Config.FrankaConfig import FrankaConfig  
+from Env.Config.FrankaConfig import FrankaConfig
 from Env.Config.DeformableConfig import DeformableConfig
 import numpy as np
 
 
 if __name__=="__main__":
-    
+
     franka_config = FrankaConfig(pos=[np.array([-1.0,0,0])])
     deform_config = DeformableConfig(pos=np.array([-0.62957,1.00223,0.3]))
     env=StoreEnv(frankaConfig=franka_config, deformbaleConfig=deform_config)
@@ -46,6 +46,6 @@ if __name__=="__main__":
         env.def_control.robot_step([np.array([-0.10515,0.22882,0.5])],[np.array([-np.pi / 2, 0, -np.pi / 2])],[True])
 
     reward_flag = env.get_reward()
-    
+
     while 1:
         env.step()

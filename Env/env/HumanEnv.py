@@ -40,23 +40,20 @@ class HumanEnv(BaseEnv):
             self.robotConfig=franka_config
         self.robots=self.import_franka(self.robotConfig)
         self.garment = list()
-        
+
         RigidConfig={
-                    "path":"/home/isaac/GarmentLab/Assets/Rigid/Daybed.usd",
+                    "path":"/home/user/GarmentLab/Assets/Rigid/Daybed.usd",
                     "position":np.array([-0.61832, 0.79868, 0.82689]),
                     "orientation":euler_angles_to_quat(np.array([0.,0.,np.pi/2])),
                     "scale":np.array([0.014,0.006,0.004]),
                 }
         rigid = Rigid(root_path="/World/Rigid", rigid_config=RigidConfig)
         rigid_visual = RigidVisual()
-        human = Human(path = "/home/isaac/GarmentLab/Assets/Human/human_2.usd")
-        
+        human = Human(path = "/home/user/GarmentLab/Assets/Human/human_2.usd")
+
         particle_system = None
         for config in garment_config:
             garment = Garment(self.world, config, particle_system=particle_system)
             self.garment.append(garment)
             particle_system = garment.get_particle_system()
         self.control=Control(self.world,self.robots,self.garment)
-        
-        
-

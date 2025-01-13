@@ -1,9 +1,9 @@
 import sys
-sys.path.append("/home/isaac/GarmentLab")
+sys.path.append("/home/user/GarmentLab")
 from Env.env.DeformableEnv import DeformableEnv
 
 from Env.Config.GarmentConfig import GarmentConfig
-from Env.Config.FrankaConfig import FrankaConfig  
+from Env.Config.FrankaConfig import FrankaConfig
 import numpy as np
 
 

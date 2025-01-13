@@ -52,7 +52,7 @@ class Garment:
             self.particle_system.set_solver_position_iteration_count(self.garment_config.solver_position_iteration_count)
 
         add_reference_to_stage(usd_path=self.usd_path,prim_path=self.garment_prim_path)
-        
+
         self.garment_mesh_prim_path=self.garment_prim_path+"/mesh"
         self.garment=XFormPrim(
             prim_path=self.garment_prim_path,
@@ -61,7 +61,7 @@ class Garment:
             orientation=euler_angles_to_quat(self.garment_config.ori),
             scale=self.garment_config.scale,
             )
-        
+
         self.garment_mesh=ClothPrim(
             name=self.garment_name+"_mesh",
             prim_path=self.garment_mesh_prim_path,
@@ -79,17 +79,17 @@ class Garment:
 
     def set_mass(self,mass):
         physicsUtils.add_mass(self.world.stage, self.garment_mesh_prim_path, mass)
-    
+
     def get_particle_system_id(self):
         self.particle_system_api=PhysxSchema.PhysxParticleAPI.Apply(self.particle_system.prim)
         return self.particle_system_api.GetParticleGroupAttr().Get()
-    
+
     def get_vertices_positions(self):
         return self.garment_mesh._get_points_pose()
-    
+
     def get_realvertices_positions(self):
         return self.garment_mesh._cloth_prim_view.get_world_positions()
-    
+
     def apply_visual_material(self,material_path:str):
         self.visual_material_path=find_unique_string_name(self.garment_prim_path+"/visual_material",is_unique_fn=lambda x: not is_prim_path_valid(x))
         add_reference_to_stage(usd_path=material_path,prim_path=self.visual_material_path)
@@ -97,7 +97,7 @@ class Garment:
         self.material_prim=prims_utils.get_prim_children(self.visual_material_prim)[0]
         self.material_prim_path=self.material_prim.GetPath()
         self.visual_material=PreviewSurface(self.material_prim_path)
-        
+
         self.garment_mesh_prim=prims_utils.get_prim_at_path(self.garment_mesh_prim_path)
         self.garment_submesh=prims_utils.get_prim_children(self.garment_mesh_prim)
         if len(self.garment_submesh)==0:
@@ -109,14 +109,12 @@ class Garment:
             for prim in self.garment_submesh:
                 omni.kit.commands.execute('BindMaterialCommand',
                 prim_path=prim.GetPath(), material_path=self.material_prim_path)
-        
+
     def get_vertice_positions(self):
         return self.garment_mesh._get_points_pose()
-    
+
     def set_pose(self, pos, ori):
         self.garment.set_world_pose(position=pos, orientation=ori)
-        
+
     def get_particle_system(self):
         return self.particle_system
-        
-

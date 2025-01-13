@@ -20,8 +20,8 @@ class DexRightEnv(BaseEnv):
 
         config = DexConfig(env=self, app=app, translation=np.array([0, 0, 0.5]))
         garment_config = GarmentConfig(
-            usd_path="/home/isaac/GarmentLab/Assets/Garment/Tops/Hooded_Lsleeve_FrontOpen/THLO_Jacket065/THLO_Jacket065_obj.usd",
-            pos=np.array([1, -0.6, 0.3]), 
+            usd_path="/home/user/GarmentLab/Assets/Garment/Tops/Hooded_Lsleeve_FrontOpen/THLO_Jacket065/THLO_Jacket065_obj.usd",
+            pos=np.array([1, -0.6, 0.3]),
             ori=np.array([0, 0, 0])
         )
 
@@ -29,17 +29,17 @@ class DexRightEnv(BaseEnv):
         self.robot = DexRight(config)
 
         self.pedestal = VisualCuboid(
-            prim_path = "/World/pedestal", 
-            name = "pedestal", 
-            position = np.array([0, 0, 0.25]), 
+            prim_path = "/World/pedestal",
+            name = "pedestal",
+            position = np.array([0, 0, 0.25]),
             scale = np.array([0.2, 0.2, 0.5]),
             color = np.array([0.5, 0.5, 0.5])
         )
 
         # self.pedestal1 = FixedCuboid(
-        #     prim_path = "/World/pedestal1", 
-        #     name = "pedestal1", 
-        #     position = np.array([1, -0.04, 0.1]), 
+        #     prim_path = "/World/pedestal1",
+        #     name = "pedestal1",
+        #     position = np.array([1, -0.04, 0.1]),
         #     scale = np.array([0.1, 0.1, 0.2]),
         #     color = np.array([0.5, 0.5, 0.5])
         # )

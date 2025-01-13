@@ -2,7 +2,7 @@ import numpy as np
 from isaacsim import SimulationApp
 import torch
 import sys
-sys.path.append("/home/isaac/GarmentLab")
+sys.path.append("/home/user/GarmentLab")
 simulation_app = SimulationApp({"headless": False})
 import numpy as np
 from omni.isaac.core.utils.types import ArticulationAction
@@ -40,8 +40,8 @@ class WashEnv(BaseEnv):
         self.fluid=Fluid(self.world,self.fluid_config)
         self.garment=Garment(self.world,self.garment_config,self.fluid.particle_system)
         self.control=Control(self.world,self.robots,[self.garment])
-        
-        
+
+
 
 
 if __name__=="__main__":

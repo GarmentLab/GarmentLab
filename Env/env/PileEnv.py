@@ -56,5 +56,3 @@ class PileEnv(BaseEnv):
         else:
             print("################ fail ################")
             return False
-        
-

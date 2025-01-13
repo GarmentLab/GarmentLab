@@ -2,7 +2,7 @@ import numpy as np
 from isaacsim import SimulationApp
 import torch
 import sys
-sys.path.append("/home/isaac/GarmentLab")
+sys.path.append("/home/user/GarmentLab")
 simulation_app = SimulationApp({"headless": False})
 import numpy as np
 
@@ -36,13 +36,13 @@ class DeformableEnv(BaseEnv):
         self.robots=self.import_franka(self.franka_config)
         self.def_control=DefControl(self.world,self.robots,[self.deformable])
         self.rigid = RigidHang()
-        
-        
+
+
 
         # self.robots=self.import_franka(self.franka_config)
         # self.def_control=DefControl(self.world,self.robots,[self.deformable])
-        
-        
+
+
 if __name__=="__main__":
     env=DeformableEnv()
     env.reset()
@@ -57,5 +57,3 @@ if __name__=="__main__":
     # o3d.visualization.draw_geometries([pcd])
     while 1:
         env.step()
-        
-        

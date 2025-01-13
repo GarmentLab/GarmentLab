@@ -2,7 +2,7 @@ import numpy as np
 import torch
 
 class InflatebleConfig:
-    def __init__(self,pos:np.ndarray=None,ori:np.ndarray=None,scale:np.ndarray=None,pressure:float=8.0,visual_material_usd:str="/home/isaac/GarmentLab/Assets/Material/linen_Pumpkin.usd"):
+    def __init__(self,pos:np.ndarray=None,ori:np.ndarray=None,scale:np.ndarray=None,pressure:float=8.0,visual_material_usd:str="/home/user/GarmentLab/Assets/Material/linen_Pumpkin.usd"):
         if pos is None:
             self.pos=np.array([0.8,0,0.5])
         else:

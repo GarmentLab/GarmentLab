@@ -38,7 +38,7 @@ class TactileFranka:
             self._franka_robot_name=robot_name
 
         self.init_position=Position
-        self.world.scene.add(Franka(prim_path=self._franka_prim_path,usd_path="/home/isaac/Tactile/IsaacTac/Robot/Franka/franka.usd",name=self._franka_robot_name,position=Position))
+        self.world.scene.add(Franka(prim_path=self._franka_prim_path,usd_path="/home/user/Tactile/IsaacTac/Robot/Franka/franka.usd",name=self._franka_robot_name,position=Position))
         self._robot:Franka=self.world.scene.get_object(self._franka_robot_name)
         self.process_franka_gripper()
         self._articulation_controller=self._robot.get_articulation_controller()
@@ -47,7 +47,7 @@ class TactileFranka:
         self._pick_place_controller=PickPlaceController(name="pick_place_controller",robot_articulation=self._robot,gripper=self._robot.gripper)
         self._controller.reset()
         self._pick_place_controller.reset()
-        
+
     def process_franka_gripper(self,):
         self.left_gripper_prim_path="/World/Franka/panda_leftfinger"
         self.left_gripper_prim_collision_path="/World/Franka/panda_leftfinger/collisions"
@@ -95,17 +95,17 @@ class TactileFranka:
             if self._pick_place_controller.is_done():
                 break
             self._articulation_controller.apply_action(actions)
-    
+
     def open(self):
         for _ in range(100):
             self._robot.gripper.open()
             self.world.step(render=True)
-    
+
     def close(self):
         for _ in range(100):
             self._robot.gripper.close()
             self.world.step(render=True)
-        
+
 
     @staticmethod
     def interpolate(start_loc, end_loc, speed):
@@ -116,27 +116,27 @@ class TactileFranka:
         if chunks==0:
             chunks=1
         return start_loc + np.outer(np.arange(chunks+1,dtype=float), (end_loc - start_loc) / chunks)
-    
+
     def position_reached(self, target,thres=0.03):
         if target is None:
             return True
-        
+
         ee_pos, R = self._controller.get_motion_policy().get_end_effector_as_prim().get_world_pose()
         pos_diff = np.linalg.norm(ee_pos- target)
         if pos_diff < thres:
             return True
         else:
-            return False 
+            return False
     def rotation_reached(self, target):
         if target is None:
             return True
-        
+
         ee_pos, R = self._controller.get_motion_policy().get_end_effector_as_prim().get_world_pose()
         angle_diff = quat_diff_rad(R, target)[0]
         # print(f'angle diff: {angle_diff}')
         if angle_diff < 0.1:
             return True
-        
+
     def movep(self,end_loc):
         self.world.step(render=True)
         start_loc=self.get_cur_ee_pos()[0]
@@ -151,7 +151,7 @@ class TactileFranka:
             cur_step+=1
             if self.position_reached(end_loc):
                 break
-    
+
     def movel(self,end_loc,env_ori=None):
         self.world.step(render=True)
         start_loc=self.get_cur_ee_pos()[0]
@@ -171,10 +171,3 @@ class TactileFranka:
             if cur_step>1000:
                 print("Failed to reach target")
                 break
-            
-            
-
-            
-
-
-

@@ -69,7 +69,7 @@ class BimanualEnv(BaseEnv):
             self.world.step()
         pts = self.garment[garment_id].get_vertice_positions()
         pts = self.Rotation(rotation,pts)
-        path = "/home/isaac/GarmentLab/Assets/succ_example/fling_test_example.txt"
+        path = "/home/user/GarmentLab/Assets/succ_example/fling_test_example.txt"
         np.savetxt(path, pts)
         coverage_trial = self.get_current_covered_area(pts)
         self.world.stop()
@@ -78,7 +78,7 @@ class BimanualEnv(BaseEnv):
         for i in range(20):
             self.world.step()
         pts = self.garment[garment_id].get_vertice_positions()
-        path = "/home/isaac/GarmentLab/Assets/succ_example/fling_standard_example.txt"
+        path = "/home/user/GarmentLab/Assets/succ_example/fling_standard_example.txt"
         np.savetxt(path, pts)
         coverage_standard = self.get_current_covered_area(pts)
         if  coverage_trial/coverage_standard > 0.75:
@@ -91,7 +91,7 @@ class BimanualEnv(BaseEnv):
 
     def get_current_covered_area(self, pos, cloth_particle_radius: float = 0.00625):
         """
-        Calculate the covered area by taking max x,y cood and min x,y 
+        Calculate the covered area by taking max x,y cood and min x,y
         coord, create a discritized grid between the points
         :param pos: Current positions of the particle states
         """
@@ -118,7 +118,7 @@ class BimanualEnv(BaseEnv):
         grid[idx] = 1
         return np.sum(grid) * span[0] * span[1]
 
-            
+
     def vectorized_range1(self,start, end):
         """  Return an array of NxD, iterating from the start to the end"""
         N = int(np.max(end - start)) + 1
@@ -133,14 +133,14 @@ class BimanualEnv(BaseEnv):
         vec_y = np.tile(vec_y[:, :, None], [1, 1, K]).reshape(N, -1)
         return vec_x, vec_y
 
-    
+
     def get_keypoint_groups(self,xzy : np.ndarray):
         x = xzy[:, 0]
         y = xzy[:, 2]
 
         cloth_height = float(np.max(y) - np.min(y))
         cloth_width = float(np.max(x) - np.min(x))
-        
+
         max_ys, min_ys = [], []
         num_bins = 40
         x_min, x_max = np.min(x),  np.max(x)
@@ -159,7 +159,7 @@ class BimanualEnv(BaseEnv):
         end_offset = num_bins//10
         roc[:begin_offset] = np.max(roc[:begin_offset])
         roc[-end_offset:] = np.max(roc[-end_offset:])
-        
+
         #find where the rate of change in height dips, it corresponds to the x coordinate of the right shoulder
         right_x = (x_max - mid) * (np.argmin(roc)/num_bins) + mid
 
@@ -197,7 +197,7 @@ class BimanualEnv(BaseEnv):
         self.top_left=pickpoint_top_left,
         self.right_shoulder=right_pickpoint_shoulder,
         self.left_shoulder=left_pickpoint_shoulder,
-        
+
 
         # get middle point
         middle_point_pos=np.array([0,0.1,0])
@@ -220,8 +220,3 @@ class BimanualEnv(BaseEnv):
         # self.bottom_point=np.argmin(self.init_position[x_middle_band,2])
 
         self.keypoint=[self.bottom_left,self.bottom_right,self.top_left,self.top_right,self.left_shoulder,self.right_shoulder,self.middle_point,self.left_point,self.right_point,self.top_point,self.bottom_point]
-
-
-
-        
-

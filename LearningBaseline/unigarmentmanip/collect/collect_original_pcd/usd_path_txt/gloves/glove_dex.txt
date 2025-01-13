@@ -1,0 +1,7 @@
+Assets/Garment/Glove/GL_Gloves050/GL_Gloves050_obj.usd
+Assets/Garment/Glove/GL_Gloves038/GL_Gloves038_obj.usd
+Assets/Garment/Glove/GL_Gloves054/GL_Gloves054_obj.usd
+Assets/Garment/Glove/GL_Gloves104/GL_Gloves104_obj.usd
+Assets/Garment/Glove/GL_Gloves037/GL_Gloves037_obj.usd
+Assets/Garment/Glove/GL_Gloves063/GL_Gloves063_obj.usd
+Assets/Garment/Glove/GL_Gloves106/GL_Gloves106_obj.usd

@@ -2,7 +2,7 @@ import numpy as np
 from isaacsim import SimulationApp
 import torch
 
-simulation_app = SimulationApp({"headless": False})
+simulation_app = SimulationApp({"headless": False,"muti_gpu":False})
 import numpy as np
 from omni.isaac.core.utils.types import ArticulationAction
 from omni.isaac.franka import Franka
@@ -17,7 +17,7 @@ from omni.isaac.franka import KinematicsSolver
 from omni.isaac.core.utils.types import ArticulationAction
 import torch
 import sys
-sys.path.append("/home/isaac/GarmentLab/")
+sys.path.append("/home/user/GarmentLab/")
 from Env.Utils.transforms import euler_angles_to_quat
 from Env.Utils.transforms import quat_diff_rad
 from Env.env.BaseEnv import BaseEnv
@@ -27,6 +27,7 @@ from Env.env.Control import Control
 from Env.Config.GarmentConfig import GarmentConfig
 from Env.Config.FrankaConfig import FrankaConfig
 from Env.Config.DeformableConfig import DeformableConfig
+from Env.Camera.Recording_Camera import Recording_Camera
 import open3d as o3d
 
 class FoldEnv(BaseEnv):
@@ -45,7 +46,25 @@ class FoldEnv(BaseEnv):
             self.franka_config=franka_config
         self.robots=self.import_franka(self.franka_config)
         self.control=Control(self.world,self.robots,[self.garment[0]])
-        
+        self.camera = Recording_Camera(
+            camera_position=np.array([0.0, 1.0, 6.75]),
+            camera_orientation=np.array([0, 90.0, 90.0]),
+            prim_path="/World/recording_camera",
+        )
+
+    def reset(self):
+        super().reset()
+        self.camera.initialize(
+            depth_enable=True,
+            pc_enable=True,
+            segment_prim_path_list=[
+                "/World/Garment/garment",
+            ]
+        )
+
+
+
+
 
 
 if __name__=="__main__":

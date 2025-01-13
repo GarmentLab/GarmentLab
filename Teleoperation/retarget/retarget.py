@@ -4,7 +4,7 @@ import os
 import sys
 import time
 from typing import List, Optional, Tuple
-sys.path.append("/home/isaac/projects/shadow_robot/base/src/sr_interface/shadow-hand-ros-inside/src")
+sys.path.append("/home/user/projects/shadow_robot/base/src/sr_interface/shadow-hand-ros-inside/src")
 import numpy as np
 from align import best_fit_transform
 from const import HAND_KEYPOINT_NAMES, HAND_VISULIZATION_LINKS
@@ -31,8 +31,8 @@ velocity_filter_l = VelocityFilter(5, 5)
 def optimize(target, side: Optional[str] = "right"):
     global solver_l
     global solver_r
-    zero_keypoints = solver_l.get_zero_pose() if side == "left" else solver_r.get_zero_pose() 
-    
+    zero_keypoints = solver_l.get_zero_pose() if side == "left" else solver_r.get_zero_pose()
+
     scale_factor = calc_scale_factor(target, zero_keypoints)
     target *= scale_factor
 
@@ -40,7 +40,7 @@ def optimize(target, side: Optional[str] = "right"):
             target[[0, 5, 9, 13]],
             zero_keypoints[[0, 5, 9, 13]],
         )
-    
+
     target = (R @ target.T).T + t
     target += zero_keypoints[[5, 9, 13]].mean(axis=0) - target[
              [5, 9, 13]
@@ -154,11 +154,11 @@ def callback(data):
 
 
 if __name__ == "__main__":
-    # filenames = glob.glob("/home/isaac/projects/shadow_robot/base/src/sr_interface/shadow-hand-project/retarget/hand_pose/*joint*.npy")
+    # filenames = glob.glob("/home/user/projects/shadow_robot/base/src/sr_interface/shadow-hand-project/retarget/hand_pose/*joint*.npy")
     # filenames = natsorted(filenames)
     # target = np.stack([np.load(filename) for filename in filenames])
 
-    # target = np.load("/home/isaac/projects/shadow_robot/base/src/sr_interface/shadow-hand-project/retarget/leap_motion.npy")[::4]
+    # target = np.load("/home/user/projects/shadow_robot/base/src/sr_interface/shadow-hand-project/retarget/leap_motion.npy")[::4]
 
 #     # target = target - target[:, 0:1, :]
 
@@ -166,7 +166,7 @@ if __name__ == "__main__":
 
 #     # plot_hand_motion_keypoints(target, "target_glove_1.gif")
 #     # exit(0)
-    
+
 #     rospy.init_node('retarget2robot',anonymous=True)
 #     _thread.start_new_thread( thread_publisher, ("Thread-1", ) )
 

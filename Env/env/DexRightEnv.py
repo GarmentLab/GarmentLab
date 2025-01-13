@@ -3,7 +3,7 @@ import numpy as np
 
 from isaacsim import SimulationApp
 
-# sys.path.append("/home/isaac/GarmentLab/")
+# sys.path.append("/home/user/GarmentLab/")
 
 app = SimulationApp({"headless": False})
 
@@ -40,5 +40,3 @@ while True:
     env.step()
     target_pos, target_ori = env.target.get_world_pose()
     env.robot.move_to(target_pos, target_ori, angular_type="quat")
-    
-

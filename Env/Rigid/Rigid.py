@@ -37,7 +37,7 @@ class Rigid():
             scale=rigid_config["scale"],
             orientation=rigid_config["orientation"],
         )
-        
+
         self.geom_prim=GeometryPrim(
             prim_path=full_path,
             collision=True
@@ -73,7 +73,7 @@ class RigidHangCloth():
                                 position=np.array([0.00282,-1.97493,0.5]),
                                 scale=np.array([0.02,0.02,0.02]),
                                 visible=False)
-        
+
 
 class RigidHangFling():
     def __init__(self):
@@ -113,7 +113,7 @@ class RigidVisual():
 
 class RigidStore():
     def __init__(self):
-        add_reference_to_stage(usd_path="/home/isaac/GarmentLab/Assets/Articulated/cabinet.usd",prim_path="/World")
+        add_reference_to_stage(usd_path="/home/user/GarmentLab/Assets/Articulated/cabinet.usd",prim_path="/World")
         # self.rigid_form=XFormPrim(
         #     prim_path="/World/cabinet",
         #     name="cabinet",
@@ -124,10 +124,10 @@ class RigidStore():
                                 position=np.array([0.00282,0.0,0.5]),
                                 scale=np.array([0.02,0.02,0.02]),
                                 visible=True)
-        
+
 class RigidTable:
     def __init__(self,world:World):
-        add_reference_to_stage("/home/isaac/GarmentLab/Assets/Scene/Willow.usd","/World/table")  
+        add_reference_to_stage("/home/user/GarmentLab/Assets/Scene/Willow.usd","/World/table")
         self.table_rigid_prim:RigidPrim=world.scene.add(RigidPrim(
             prim_path="/World/table",
             name="table",
@@ -140,8 +140,6 @@ class RigidTable:
         ))
         self.table_geo_prim.set_collision_approximation("convexHull")
         self.table_geo_prim.set_contact_offset(0.01)
-    
+
     def get_prim_path(self):
         return self.table_rigid_prim.prim_path
-        
-        

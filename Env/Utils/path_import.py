@@ -714,9 +714,9 @@ if __name__=="__main__":
         "kit/plugins/bindings-python",
         "kit/python/lib/python3.10/site-packages",
         "python_packages",]
-    
-    exp="/home/isaac/.local/share/ov/pkg/isaac-sim-4.0.0"
-    
+
+    exp="/home/user/.local/share/ov/pkg/isaac-sim-4.0.0"
+
     with open ('path_import.txt', 'w') as f:
         for path in path_list:
             f.write(f'"{exp}/{path}",\n')

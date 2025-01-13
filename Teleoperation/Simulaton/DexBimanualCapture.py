@@ -23,9 +23,9 @@ class Dexbimanual(BaseEnv):
         configR = DexConfig(env=self, app=app, translation=np.array([0, -0.5, 0.5]))
         configL = DexConfig(env=self, app=app, translation=np.array([0, 0.5, 0.5]))
         garment_config = GarmentConfig(
-            usd_path="/home/isaac/GarmentLab/Assets/Garment/Tops/Hooded_Lsleeve_FrontOpen/THLO_Jacket065/THLO_Jacket065_obj.usd",
-            pos=np.array([1.2, -1, 0.3]), 
-            ori=np.array([0, 0, 0]), 
+            usd_path="/home/user/GarmentLab/Assets/Garment/Tops/Hooded_Lsleeve_FrontOpen/THLO_Jacket065/THLO_Jacket065_obj.usd",
+            pos=np.array([1.2, -1, 0.3]),
+            ori=np.array([0, 0, 0]),
             scale=np.array([0.01, 0.01, 0.01])
         )
 
@@ -38,26 +38,26 @@ class Dexbimanual(BaseEnv):
         self.appended_info = []
 
         self.pedestal1 = VisualCuboid(
-            prim_path = "/World/pedestal1", 
-            name = "pedestal1", 
-            position = np.array([0, -0.5, 0.25]), 
+            prim_path = "/World/pedestal1",
+            name = "pedestal1",
+            position = np.array([0, -0.5, 0.25]),
             scale = np.array([0.2, 0.2, 0.5]),
             color = np.array([0.5, 0.5, 0.5])
         )
 
         self.pedestal2 = VisualCuboid(
-            prim_path = "/World/pedestal2", 
-            name = "pedestal2", 
-            position = np.array([0, 0.5, 0.25]), 
+            prim_path = "/World/pedestal2",
+            name = "pedestal2",
+            position = np.array([0, 0.5, 0.25]),
             scale = np.array([0.2, 0.2, 0.5]),
             color = np.array([0.5, 0.5, 0.5])
         )
 
     def record_callback(self, step_size):
-        self.savings.append({ 
-            "joint_pos_L": self.robotL.get_joint_positions(), 
+        self.savings.append({
+            "joint_pos_L": self.robotL.get_joint_positions(),
             "joint_pos_R": self.robotR.get_joint_positions(),
-            "appended_info": self.appended_info 
+            "appended_info": self.appended_info
         })
 
 env = Dexbimanual()
