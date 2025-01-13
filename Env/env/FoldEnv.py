@@ -47,8 +47,8 @@ class FoldEnv(BaseEnv):
         self.robots=self.import_franka(self.franka_config)
         self.control=Control(self.world,self.robots,[self.garment[0]])
         self.camera = Recording_Camera(
-            camera_position=np.array([0.0, 1.0, 6.75]),
-            camera_orientation=np.array([0, 90.0, 90.0]),
+            camera_position=np.array([0.0, 0, 6.75]),
+            camera_orientation=np.array([0, 90.0, 90]),
             prim_path="/World/recording_camera",
         )
 
@@ -80,8 +80,8 @@ if __name__=="__main__":
     while 1:
         env.step()
         step+=1
-        if step%100==0:
-            points=env.garment[0].get_realvertices_positions().reshape(-1,3)
+        if step%1000==0:
+            points=env.garment[0].get_vertices_positions().reshape(-1,3)
             pcd=o3d.geometry.PointCloud()
             pcd.points=o3d.utility.Vector3dVector(points)
             o3d.visualization.draw_geometries([pcd])

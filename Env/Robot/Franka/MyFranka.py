@@ -144,7 +144,7 @@ class MyFranka:
         self.world.step(render=True)
         start_loc=self.get_cur_ee_pos()[0]
         cur_step=0
-        while 1:
+        for i in range(200):
             self.world.step(render=True)
             end_effector_orientation = euler_angles_to_quat(self.default_ee_ori)
             target_joint_positions = self._controller.forward(

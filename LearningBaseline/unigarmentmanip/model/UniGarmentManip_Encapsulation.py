@@ -16,7 +16,7 @@ class UniGarmentManip_Encapsulation:
         '''
         self.catogory = catogory
         # set resume path
-        resume_path = f"Model/UniGarmentManip/checkpoints/{self.catogory}/checkpoint.pth"
+        resume_path = f"./LearningBaseline/unigarmentmanip/checkpoints/{self.catogory}/checkpoint.pth"
         # set seed
         seed = 42
         torch.manual_seed(seed)
@@ -60,7 +60,7 @@ class UniGarmentManip_Encapsulation:
         '''
 
         #get model output (feature)
-        demo_pcd = o3d.io.read_point_cloud(f"Model/UniGarmentManip/checkpoints/{self.catogory}/demo_garment.ply").points
+        demo_pcd = o3d.io.read_point_cloud(f"./LearningBaseline/unigarmentmanip/checkpoints/{self.catogory}/demo_garment.ply").points
         demo_feature = self.get_feature(demo_pcd, index_list)
         manipulate_feature = self.get_feature(input_pcd)
 

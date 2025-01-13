@@ -222,7 +222,7 @@ class Control:
         for i in range(30):
             self.world.step()
         self.robot_close(flag)
-    def move(self,pos:list,ori:list,flag:list[bool],max_limit=1000):
+    def move(self,pos:list,ori:list,flag:list[bool],max_limit=300):
         '''
         move_function
         pos: list of robots target position

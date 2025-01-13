@@ -1,4 +1,0 @@
-Assets/Garment/Hat/HA_Hat021/HA_Hat021.obj
-Assets/Garment/Hat/HA_Hat013/HA_Hat013.obj
-Assets/Garment/Hat/HA_Hat012/HA_Hat012.obj
-

@@ -1,9 +1,0 @@
-Assets/Garment/Scarf_Tie/ST_Scarf-025/ST_Scarf-025_obj.usd
-Assets/Garment/Scarf_Tie/ST_Scarf-001/ST_Scarf-001_obj.usd
-Assets/Garment/Scarf_Tie/ST_Scarf-004/ST_Scarf-004_obj.usd
-Assets/Garment/Scarf_Tie/ST_scarf4/ST_scarf4_obj.usd
-Assets/Garment/Scarf_Tie/ST_scarf3/ST_scarf3_obj.usd
-Assets/Garment/Scarf_Tie/ST_scarf2/ST_scarf2_obj.usd
-Assets/Garment/Scarf_Tie/ST_Scarf-006/ST_Scarf-006_obj.usd
-Assets/Garment/Scarf_Tie/ST_Scarf-003/ST_Scarf-003_obj.usd
-Assets/Garment/Scarf_Tie/ST_Scarf-007/ST_Scarf-007_obj.usd
