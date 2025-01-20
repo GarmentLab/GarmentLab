@@ -1,8 +1,6 @@
 
 import os
 import sys
-sys.path.append(os.getcwd())
-sys.path.append("unigarment/train")
 
 import wandb
 from tqdm import tqdm
@@ -16,10 +14,10 @@ import random
 from info_nce import InfoNCE
 from prefetch_generator import BackgroundGenerator
 
-from unigarment.train.base.config import Config
-from unigarment.train.base.utils import *
-from unigarment.train.model.pointnet2_Sofa_Model import Sofa_Model
-from unigarment.train.val.simple_val import *
+from LearningBaseline.unigarmentmanip.train.base.config import Config
+from LearningBaseline.unigarmentmanip.train.base.utils import *
+from LearningBaseline.unigarmentmanip.train.model.pointnet2_Sofa_Model import Sofa_Model
+from LearningBaseline.unigarmentmanip.train.val.simple_val import *
 import open3d as o3d
 from sklearn.decomposition import PCA
 
@@ -34,8 +32,8 @@ import sys
 import torch.nn.functional as F
 from info_nce import InfoNCE
 import matplotlib.pyplot as plt
-from unigarment.train.val.simple_val import *
-from unigarment.train.dataloader.utils import get_deformation_paths
+from LearningBaseline.unigarmentmanip.train.val.simple_val import *
+from LearningBaseline.unigarmentmanip.train.dataloader.utils import get_deformation_paths
 
 config = Config()
 

@@ -1,8 +1,6 @@
 import os
 import sys
-sys.path.append("unigarment/train")
-sys.path.append("/home/user/DexGarmentLab-master/DexGarmentLab-master/unigarment")
-sys.path.append("unigarment/train/dataloader")
+
 
 import numpy as np
 import torch

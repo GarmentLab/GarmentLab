@@ -1,8 +1,7 @@
 
 import os
 import sys
-sys.path.append(os.getcwd())
-sys.path.append("unigarment/train")
+
 
 import wandb
 from tqdm import tqdm
@@ -66,7 +65,7 @@ def train(checkpoint_dir:str, resume_path:str=None):
     criterion=InfoNCE(negative_mode='paired',temperature=config.temperature)
 
     
-    wandb.init(project="unigarment-front-open_r", 
+    wandb.init(project="unigarmentmanip-front-open_r", 
                name="train_session", 
                config={
                     "learning_rate": config.lr,

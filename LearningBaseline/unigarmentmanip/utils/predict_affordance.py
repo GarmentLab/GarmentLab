@@ -2,9 +2,7 @@
 import os
 import sys
 sys.path.append(os.getcwd())
-sys.path.append("unigarment/train")
-sys.path.append("/home/user/DexGarmentLab-master/DexGarmentLab-master/unigarment/unigarmentmlp")
-sys.path.append("/home/user/DexGarmentLab-master/DexGarmentLab-master/unigarment/unigarmentmlp/merger")
+
 
 import wandb
 from tqdm import tqdm
@@ -18,9 +16,9 @@ import random
 from info_nce import InfoNCE
 from prefetch_generator import BackgroundGenerator
 
-from unigarment.train.base.config import Config
-from unigarment.train.model.pointnet2_Sofa_Model import Sofa_Model
-from unigarment.train.val.simple_val import *
+from LearningBaseline.unigarmentmanip.train.base.config import Config
+from LearningBaseline.unigarmentmanip.train.model.pointnet2_Sofa_Model import Sofa_Model
+from LearningBaseline.unigarmentmanip.train.val.simple_val import *
 import open3d as o3d
 from sklearn.decomposition import PCA
 
@@ -341,71 +339,6 @@ if __name__ == '__main__':
     random.seed(seed)
     
     points = np.random.rand(2048, 3)
-    # get_features(points)
-      
-
-    
-    # npz_paths = [
-    #     "data/with_sleeves/cd_processed/mesh_pcd/219_TNLC_model2_027_obj/p_0.npz",
-    #     "data/with_sleeves/cd_processed/mesh_pcd/277_TNLC_Jumper002_obj/p_0.npz",
-    #     "data/with_sleeves/cd_processed/mesh_pcd/54_TCLC_model2_014_obj/p_0.npz",
-    #     "data/with_sleeves/cd_processed/mesh_pcd/299_TNLC_Sweater011_obj/p_0.npz",
-    #     "data/with_sleeves/cd_processed/mesh_pcd/57_TCLC_Top608_obj/p_0.npz",
-    #     "data/with_sleeves/cd_processed/mesh_pcd/207_TNLC_Top425_obj/p_0.npz",      # 5    
-    #     "data/with_sleeves/cd_processed/mesh_pcd/214_TNLC_Jacket007_1_obj/p_0.npz",
-    #     "data/with_sleeves/cd_processed/mesh_pcd/211_TNLC_Top525_obj/p_0.npz",   
-    #     "data/with_sleeves/cd_processed/mesh_pcd/261_TNLC_Top402_obj/p_0.npz",  
-    #     "data/with_sleeves/cd_processed/mesh_pcd/136_TCLC_Jacket005_1_obj/p_0.npz",  
-    #     "data/with_sleeves/cd_processed/mesh_pcd/100_TCLC_Top041_1_obj/p_0.npz",   # 10     
-    #     "data/with_sleeves/cd_processed/mesh_pcd/71_TCLC_066_obj/p_0.npz",
-    #     "data/with_sleeves/cd_processed/mesh_pcd/91_TCLC_jacket096_obj/p_0.npz",
-    #     "data/with_sleeves/cd_processed/mesh_pcd/103_TCLC_Top012_0_obj/p_0.npz",   # 13
-    #     "data/with_sleeves/cd_processed/mesh_pcd/144_TCLC_Top530_obj/p_0.npz",
-    #     "data/with_sleeves/cd_processed/mesh_pcd/300_TNLC_Top200_obj/p_0.npz",
-    # ]
-
-
-    # hat_npz_paths = [
-    #     "data/Hat/unigarment/cd_processed/mesh_pcd/0_HA_Hat044_obj",
-    #     "data/Hat/unigarment/cd_processed/mesh_pcd/1_HA_Hat045_obj"
-    # ]
-    
-
-    
-    # ns_tops_paths = ["data/ns_tops/unigarment/cd_processed/mesh_pcd/0_TCNC_Top338_obj",
-    #                  "data/ns_tops/unigarment/cd_processed/mesh_pcd/1_TCNC_Top655_obj",
-    #                  "data/ns_tops/unigarment/cd_processed/mesh_pcd/2_TCNC_Top042_1_obj",
-    #                  "data/ns_tops/unigarment/cd_processed/mesh_pcd/41_TCNC_Jacket087_obj",
-    #                  "data/ns_tops/unigarment/cd_processed/mesh_pcd/64_TCNC_Top349_obj",
-    #                  "data/ns_tops/unigarment/cd_processed/mesh_pcd/107_THNC_097_obj",
-    #                  "data/ns_tops/unigarment/cd_processed/mesh_pcd/164_TNNC_top190_obj",
-    #                  "data/ns_tops/unigarment/cd_processed/mesh_pcd/178_TNNC_Normal_Model_005_obj",
-    #                  "data/ns_tops/unigarment/cd_processed/mesh_pcd/185_TNNC_Top394_obj"]
-    
-    # dress_paths = [    
-    #     "data/dress/unigarment/cd_processed/mesh_pcd/30_DSLS_Dress217_obj",
-    #     "data/dress/unigarment/cd_processed/mesh_pcd/0_DLLS_Dress206_obj",
-    #     "data/dress/unigarment/cd_processed/mesh_pcd/1_DLLS_Dress289_obj",
-    #     "data/dress/unigarment/cd_processed/mesh_pcd/2_DLLS_Dress281_obj",
-    #     "data/dress/unigarment/cd_processed/mesh_pcd/3_DLLS_dress086_obj",
-    #     "data/dress/unigarment/cd_processed/mesh_pcd/9_DLLS_Dress359_obj",
-    #     "data/dress/unigarment/cd_processed/mesh_pcd/12_DLLS_Dress352_obj",
-    #     "data/dress/unigarment/cd_processed/mesh_pcd/44_DSLS_Dress415_obj", 
-    #     "data/dress/unigarment/cd_processed/mesh_pcd/53_DSLS_Dress330_obj",
-    #     "data/dress/unigarment/cd_processed/mesh_pcd/52_DSLS_Dress288_obj",
-    #     "data/dress/unigarment/cd_processed/mesh_pcd/32_DSLS_Dress207_obj"
-    # ]
-    
-    # glove_paths = [    
-    #     "data/glove/unigarment/cd_processed/mesh_pcd/0_GL_Gloves079_obj",
-    #     "data/glove/unigarment/cd_processed/mesh_pcd/1_GL_Gloves068_obj",
-    #     "data/glove/unigarment/cd_processed/mesh_pcd/3_GL_Gloves067_obj",
-    #     "data/glove/unigarment/cd_processed/mesh_pcd/4_GL_Gloves047_obj",
-    #     "data/glove/unigarment/cd_processed/mesh_pcd/7_GL_Gloves100_obj",
-    #     "data/glove/unigarment/cd_processed/mesh_pcd/8_GL_Gloves050_obj",
-    #     "data/glove/unigarment/cd_processed/mesh_pcd/12_GL_Gloves077_obj",
-    #     "data/glove/unigarment/cd_processed/mesh_pcd/18_GL_Gloves106_obj",
-    # ]
     
     trousers_paths = [
         "data/trousers/unigarment/cd_processed/mesh_pcd/5_PL_LongPants014_obj",
@@ -426,23 +359,6 @@ if __name__ == '__main__':
               
     ]
     
-    # scarf_paths = ["data/scarf/cd_processed/mesh_pcd/0_ST_Scarf-009_obj"]
-    
-    # front_open_paths = ["data/front_open/unigarment/cd_processed/mesh_pcd/0_TCLO_model2_054_obj",
-    #                     "data/front_open/unigarment/cd_processed/mesh_pcd/4_TCLO_Jacket112_obj",
-    #                     "data/front_open/unigarment/cd_processed/mesh_pcd/23_TCLO_Suit006_obj",
-    #                     "data/front_open/unigarment/cd_processed/mesh_pcd/51_TCLO_Shirt023_obj",
-    #                     "data/front_open/unigarment/cd_processed/mesh_pcd/60_TNLO_Top278_obj",
-    #                     "data/front_open/unigarment/cd_processed/mesh_pcd/70_TNLO_Jacket022_obj"
-    #                     ]
-    
-    
-    # ls_tops_paths = ["data/ls_tops/cd_rotation/mesh_pcd/54_TCLC_model2_014_obj",
-    #                  "data/ls_tops/cd_rotation/mesh_pcd/82_TCLC_Top583_obj",
-    #                  "data/ls_tops/cd_rotation/mesh_pcd/96_TCLC_model2_081_obj",
-    #                  "data/ls_tops/cd_rotation/mesh_pcd/128_TCLC_Jacket006_1_obj",
-    #                  "data/ls_tops/cd_rotation/mesh_pcd/245_TNLC_Top496_obj",
-    #                  "data/ls_tops/cd_rotation/mesh_pcd/324_TNLC_Shirt001_obj"]
     
     resume_path = "Checkpoint/f2d/checkpoint_1_160000.pth"
     model=Sofa_Model(feature_dim=config.feature_dim)

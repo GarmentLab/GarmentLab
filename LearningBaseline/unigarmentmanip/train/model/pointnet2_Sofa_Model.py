@@ -1,6 +1,5 @@
 import os
 import sys
-sys.path.append("unigarment/train/model")
 
 import torch
 import torch.nn as nn

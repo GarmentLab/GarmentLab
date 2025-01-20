@@ -6,8 +6,6 @@ import torch
 from torch.utils.data import Dataset
 import os
 import sys
-sys.path.append(os.getcwd())
-sys.path.append("unigarment/train")
 
 import torch.nn.functional as F
 from info_nce import InfoNCE
@@ -15,8 +13,8 @@ from tqdm import tqdm
 import matplotlib.pyplot as plt
 
 from model.pointnet2_Sofa_Model import Sofa_Model
-from unigarment.train.dataloader.utils import *
-from unigarment.train.base.config import c2f_Config
+from LearningBaseline.unigarmentmanip.train.dataloader.utils import *
+from LearningBaseline.unigarmentmanip.train.base.config import c2f_Config
 
 configs = c2f_Config()
 device = 'cuda' if torch.cuda.is_available() else 'cpu'
